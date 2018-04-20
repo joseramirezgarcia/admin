@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import firebase from 'firebase'
 
 const routerOptions = [
-  { path: '/', component: 'Signin' },
+  { path: '/', component: 'Registro' },
+  { path: '/registro', component: 'Registro' },
   { path: '/signin', component: 'Signin' },
   { path: '/signup', component: 'Signup' },
   { path: '/home', component: 'Home', meta: { requiresAuth: true } },
@@ -28,7 +29,8 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   const isAuthenticated = firebase.auth().currentUser
   if (requiresAuth && !isAuthenticated) {
-    next('/signin')
+    // next('/signin')
+    next('/registro')
   } else {
     next()
   }
