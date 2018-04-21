@@ -3,7 +3,6 @@
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-24">
-          <form @submit.prevent='userSignIn'>
             <v-toolbar dark color="primary">
               <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
               <v-spacer></v-spacer>
@@ -39,10 +38,9 @@
             </v-card-text>
             <v-card-actions>
               <v-flex class='text-xs-center' my-3>
-                <v-btn color='primary' type='submit'>Ingresar</v-btn>
+                <v-btn color='primary' type='submit' @click='userSignIn'>Ingresar</v-btn>
               </v-flex>
             </v-card-actions>
-          </form>
         </v-card>
       </v-flex>
     </v-layout>

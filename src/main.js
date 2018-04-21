@@ -10,7 +10,12 @@ import { fb } from './config/firebase'
 import VueFire from 'vuefire'
 Vue.use(VueFire)
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#194e91',
+    error: '#c51a4a'
+  }
+})
 
 Vue.config.productionTip = false
 
