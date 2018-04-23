@@ -4,10 +4,12 @@ import firebase from 'firebase'
 
 const routerOptions = [
   { path: '/', component: 'Signin' },
-  { path: '/registro', component: 'Registro' },
-  { path: '/signin', component: 'Signin' },
-  { path: '/signup', component: 'Signup' },
-  { path: '/home', component: 'Home', meta: { requiresAuth: true } },
+  { path: '/registro', component: 'Registro', name: 'registro' },
+  { path: '/confirmacion', component: 'Confirmacion', name: 'confirmacion', props: true },
+  { path: '/registroreunionanual', component: 'RegistroReunionAnual', name: 'registroreunionanual' },
+  { path: '/signin', component: 'Signin', name: 'signin' },
+  { path: '/signup', component: 'Signup', name: 'signup' },
+  { path: '/home', component: 'Home', name: 'home', meta: { requiresAuth: true } },
   { path: '*', component: 'NotFound' }
 ]
 

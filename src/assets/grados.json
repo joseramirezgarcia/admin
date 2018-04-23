@@ -1,0 +1,17 @@
+[
+	{
+		"grado": "NO GRADUADO"
+	},
+	{
+		"grado": "LICENCIATURA"
+	},
+	{
+		"grado": "MAESTRIA"
+	},
+	{
+		"grado": "DOCTORADO"
+	},
+	{
+		"grado": "POSTDOCTORADO"
+	}
+]

@@ -19,8 +19,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-
-    <v-toolbar app  v-if='isAuthenticated'>
+    <v-toolbar app v-if='isAuthenticated'>
       <span class='hidden-sm-and-up'>
         <v-toolbar-side-icon @click='sidebar = !sidebar'>
         </v-toolbar-side-icon>
