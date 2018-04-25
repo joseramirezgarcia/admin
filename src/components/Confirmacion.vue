@@ -4,8 +4,13 @@
       <v-flex xs12 sm10 md10>
         <v-card class="elevation-24">
           <v-card-text>
-            Sus datos han sido registrados correctamente.
-            <pre>{{datos}}</pre>
+            <v-flex>
+              Sus datos han sido registrados correctamente.
+            </v-flex>
+            <!--<pre>{{datos}}</pre>-->
+            <v-flex>
+              <v-btn color="primary" href="http://c-mic.mx">Volver al sitio web del C-MIC</v-btn>
+            </v-flex>
           </v-card-text>
         </v-card>
       </v-flex>

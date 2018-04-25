@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import firebase from 'firebase'
 
 const routerOptions = [
-  { path: '/', component: 'Signin' },
+  { path: '/', component: 'RegistroReunionAnual' },
   { path: '/registro', component: 'Registro', name: 'registro' },
   { path: '/confirmacion', component: 'Confirmacion', name: 'confirmacion', props: true },
   { path: '/registroreunionanual', component: 'RegistroReunionAnual', name: 'registroreunionanual' },

@@ -12,7 +12,7 @@
                 <v-select
                   label="Buscar por nombre, número de membresía o correo electrónico"
                   :items="miembros"
-                  v-model="busqueda"
+                  v-model="miembro"
                   item-text="nombre"
                   return-object
                   chips
@@ -48,34 +48,62 @@
                     </template>
                   </template>
                 </v-select>
-              </v-flex>
-              <v-flex fill-height>
                 <v-container grid-list-xl>
-                  <v-layout wrap row align-top>
+                  <v-layout wrap row align-top fill-height>
                     <v-flex xs12 md6>
-                      <v-card class="elevation-12" fill-height>
-                        <v-card-text class="text-xs-center">
-                          <v-icon x-large class="blue--text text--lighten-2">account_circle</v-icon>
-                        </v-card-text>
-                        <v-card-title primary-title class="layout justify-center">
-                          <div class="headline text-xs-center">Miembro</div>
+                      <v-card class="elevation-12" height="100%">
+                        <v-card-title class="justify-center">
+                          <v-layout flex align-center justify-center class="headline mb-0 primary--text"><v-icon color="primary">account_circle</v-icon> Datos Generales</v-layout>
                         </v-card-title>
                         <v-card-text>
-                          {{busqueda}} 
+                          <v-flex>
+                            <v-card v-if="miembro">
+                              <v-card-title><h4>{{miembro.nombre}} {{miembro.paterno}} {{miembro.materno}}</h4></v-card-title>
+                              <v-divider></v-divider>
+                              <v-list dense>
+                                <v-list-tile>
+                                  <v-list-tile-content>Número de Membresía</v-list-tile-content>
+                                  <v-list-tile-content class="align-end">{{this.miembro.membresia}}</v-list-tile-content>
+                                </v-list-tile>
+                                <v-divider></v-divider>
+                                <v-list-tile>
+                                  <v-list-tile-content>Tipo de Membresía</v-list-tile-content>
+                                  <v-list-tile-content class="align-end">{{this.miembro.tipo}}</v-list-tile-content>
+                                </v-list-tile>                                
+                              </v-list>
+                            </v-card>
+                          </v-flex>
                         </v-card-text>
                       </v-card>
                     </v-flex>
                     <v-flex xs12 md6>
-                      <v-card class="elevation-12" fill-height>
-                        <v-card-text class="text-xs-center">
-                          <v-icon x-large class="blue--text text--lighten-2">list</v-icon>
-                        </v-card-text>
-                        <v-card-title primary-title class="layout justify-center">
-                          <div class="headline">Pago</div>
+                      <v-card class="elevation-12" height="100%">
+                        <v-card-title class="justify-center">
+                          <v-layout flex align-center justify-center class="headline mb-0 primary--text"><v-icon color="primary">monetization_on</v-icon> Detalles de pago</v-layout>                   
                         </v-card-title>
                         <v-card-text>
-                          Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
-                          Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. 
+                          <v-flex v-if="miembro" class="text-xs-center">
+                            <v-card  v-if="miembro">
+                              <v-card-title><h4>5ta Reunión Anual del C-MIC:</h4></v-card-title>
+                              <v-divider></v-divider>
+                              <v-list dense>
+                                <v-list-tile>
+                                  <v-list-tile-content>COSTO {{miembro.tipo}}</v-list-tile-content>
+                                  <v-list-tile-content class="align-end">$ {{this.amount}} </v-list-tile-content>
+                                </v-list-tile>
+                                <v-divider></v-divider>
+                                <v-list-tile>
+                                </v-list-tile>
+                                <v-list-tile>
+                                  <v-container fluid fill-height>
+                                    <v-layout align-center justify-center class="py-3">
+                                      <paypal :amount="amount"></paypal>      
+                                    </v-layout>
+                                  </v-container>
+                                </v-list-tile>                                
+                              </v-list>
+                            </v-card>
+                          </v-flex>
                         </v-card-text>
                       </v-card>
                     </v-flex>
@@ -92,6 +120,7 @@
 
 <script>
 import { fb } from '../config/firebase'
+import PayPal from './PayPal'
 
 let db = fb.database()
 let miembrosRef = db.ref('miembros')
@@ -101,8 +130,13 @@ export default {
   },
   data () {
     return {
-      busqueda: []
+      miembro: null,
+      amount: 700,
+      boton: false
     }
+  },
+  components: {
+    'paypal': PayPal
   },
   methods: {
     filtrarMiembros (item, queryText, itemText) {
@@ -118,11 +152,21 @@ export default {
         .replace(/[^A-Za-z0-9]/g, function (ch) { return map[ch] || ch })
         .indexOf(query.toString().toLowerCase().replace(/[^A-Za-z0-9]/g, function (ch) { return map[ch] || ch })) > -1
     }
+  },
+  watch: {
+    miembro: function () {
+      if (this.miembro !== null) {
+        this.amount = 900
+        if (this.miembro.tipo === 'ESTUDIANTE') {
+          this.amount = 700
+        }
+      }
+    }
   }
 }
 </script>
 <style>
- .content--wrap {
+.content--wrap {
   background: url('../assets/5reunionanual.jpg') no-repeat center center;
   background-size: cover;
 }
