@@ -69,7 +69,18 @@
                                 <v-list-tile>
                                   <v-list-tile-content>Tipo de Membresía</v-list-tile-content>
                                   <v-list-tile-content class="align-end">{{this.miembro.tipo}}</v-list-tile-content>
-                                </v-list-tile>                                
+                                </v-list-tile>
+                                <v-list-tile>
+                                  <v-list-tile-content>
+                                    <v-text-field
+                                      name='codigo'
+                                      label='Código de descuento'
+                                      id='codigo'
+                                      type='text'
+                                      v-model='codigo'
+                                    ></v-text-field>
+                                  </v-list-tile-content>
+                                </v-list-tile>
                               </v-list>
                             </v-card>
                           </v-flex>
@@ -93,13 +104,15 @@
                                 </v-list-tile>
                                 <v-divider></v-divider>
                                 <v-list-tile>
-                                </v-list-tile>
-                                <v-list-tile>
-                                  <v-container fluid fill-height>
-                                    <v-layout align-center justify-center class="py-3">
-                                      <paypal :amount="amount"></paypal>      
-                                    </v-layout>
-                                  </v-container>
+                                  <paypal 
+                                    :amount="amount"
+                                    :nombre="miembro.nombre"
+                                    :paterno="miembro.paterno"
+                                    :materno="miembro.materno"
+                                    :tipo="miembro.tipo"
+                                    :membresia="miembro.membresia"
+                                    :codigo="codigo"
+                                  ></paypal>      
                                 </v-list-tile>                                
                               </v-list>
                             </v-card>
@@ -124,6 +137,7 @@ import PayPal from './PayPal'
 
 let db = fb.database()
 let miembrosRef = db.ref('miembros')
+
 export default {
   firebase: {
     miembros: miembrosRef
@@ -131,8 +145,9 @@ export default {
   data () {
     return {
       miembro: null,
-      amount: 700,
-      boton: false
+      amount: 900,
+      boton: false,
+      codigo: ''
     }
   },
   components: {
@@ -156,6 +171,16 @@ export default {
   watch: {
     miembro: function () {
       if (this.miembro !== null) {
+        this.amount = 900
+        if (this.miembro.tipo === 'ESTUDIANTE') {
+          this.amount = 700
+        }
+      }
+    },
+    codigo: function () {
+      if (this.codigo === 'CMICBUAP2018') {
+        this.amount = this.amount / 2
+      } else {
         this.amount = 900
         if (this.miembro.tipo === 'ESTUDIANTE') {
           this.amount = 700
