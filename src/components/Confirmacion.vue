@@ -1,16 +1,19 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height :style="{ 'background': 'url(\'' + image + '\') ' }" class='fondo'>
     <v-layout align-center justify-center>
       <v-flex xs12 sm10 md10>
         <v-card class="elevation-24">
           <v-card-text>
-            <v-flex>
+            <v-flex class="text-xs-center">
               Sus datos han sido registrados correctamente.
             </v-flex>
             <!--<pre>{{datos}}</pre>-->
-            <v-flex>
+            <v-flex class="text-xs-center">
               <v-btn color="primary" href="http://c-mic.mx">Volver al sitio web del C-MIC</v-btn>
             </v-flex>
+            <v-flex class="text-xs-center">
+              <v-btn color="primary" to="registroreunionanual">Registrarse en la 5a Reunión Anual</v-btn>
+            </v-flex>            
           </v-card-text>
         </v-card>
       </v-flex>
@@ -20,11 +23,13 @@
 
 <script>
 import { fb } from '../config/firebase'
+import fondo from '../assets/fondo.jpg'
 
 let db = fb.database()
 export default {
   data () {
     return {
+      image: fondo,
       datos: []
     }
   },
@@ -38,8 +43,9 @@ export default {
 }
 </script>
 <style>
-.content--wrap {
-  background: url('../assets/fondo.jpg') no-repeat center center;
-  background-size: cover;
+.fondo{
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: cover !important;
 }
 </style>

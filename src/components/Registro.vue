@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height :style="{ 'background': 'url(\'' + image + '\') ' }" class='fondo'>
     <v-layout justify-center>
       <v-flex xs12 sm10 md9 lg8>
         <v-card class="elevation-24">
@@ -340,6 +340,7 @@
 
 <script>
 import { fb } from '../config/firebase'
+import fondo from '../assets/fondo.jpg'
 
 let db = fb.database()
 let miembrosRef = db.ref('miembros')
@@ -371,6 +372,7 @@ export default {
   },
   data () {
     return {
+      image: fondo,
       formaMiembros: false,
       miembro: {
         membresia: '',
@@ -886,8 +888,9 @@ export default {
 }
 </script>
 <style>
-.content--wrap {
-  background: url('../assets/fondo.jpg') no-repeat center center;
-  background-size: cover;
+.fondo{
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: cover !important;
 }
 </style>
