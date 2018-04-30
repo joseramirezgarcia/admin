@@ -396,7 +396,7 @@ export default {
   overflow: visible;
 }
 .list__tile--disabled {
-   opacity: 1!important;
+  opacity: 1!important;
   pointer-events: all;
 }
 </style>

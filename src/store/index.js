@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    appTitle: 'CMIC Admin',
+    appTitle: 'C-MIC::Colegio Mexicano para la Investigación del Cáncer',
     user: null,
     error: null,
     loading: false

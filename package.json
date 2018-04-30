@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "firebase": "^4.12.1",
+    "font-awesome": "^4.7.0",
     "paypal-checkout": "^4.0.198",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

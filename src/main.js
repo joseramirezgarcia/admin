@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import 'font-awesome/css/font-awesome.css'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import { store } from './store'
@@ -13,6 +14,7 @@ Vue.use(VueFire)
 Vue.use(Vuetify, {
   theme: {
     primary: '#194e91',
+    secondary: '#c41949',
     error: '#c51a4a'
   }
 })
