@@ -1,7 +1,8 @@
 <template>
   <v-container fluid grid-list-lg style="bacgroundColor=#FFFFFF">
-    <v-layout row id="nosotros">
+    <v-layout row id="nosotros" my-5>
       <v-flex xs12>
+        <h1 class="mb-5 display-2 primary--text text-xs-center">NOSOTROS</h1>
         <v-card class="elevation-6">
           <v-card-title primary-title>
             <v-layout fluid justify-center>
@@ -14,7 +15,7 @@
           </v-card-title>
           <v-card-title primary-title>
             <div>
-              <div class="headline primary--text">ACERCA DE NOSOTROS</div>
+              <div class="headline primary--text">Acerca de nosotros</div>
             </div>
           </v-card-title>
           <v-card-text>
@@ -50,16 +51,11 @@
                   <v-card flat>
                     <v-card-text v-if="typeof i.texto !== 'object'">{{i.texto}}</v-card-text>
                     <v-card-text v-else>
-                      <v-list>
-                        <v-list-tile v-for="l in i.texto" :key="l">
-                          <v-list-tile-action>
-                            <v-icon small>fiber_manual_record</v-icon> 
-                          </v-list-tile-action>
-                          <v-list-tile-content>
-                            {{l.texto}}
-                          </v-list-tile-content>
-                        </v-list-tile>
-                      </v-list>
+                      <ul class="mx-5">
+                        <li v-for="l in i.texto" :key="l">
+                          {{l.texto}}
+                        </li>
+                      </ul>
                     </v-card-text>
                   </v-card>
                 </v-tab-item>
@@ -94,17 +90,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 a {
   color: #42b983;
 }

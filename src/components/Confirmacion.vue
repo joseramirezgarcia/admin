@@ -9,7 +9,7 @@
             </v-flex>
             <!--<pre>{{datos}}</pre>-->
             <v-flex class="text-xs-center">
-              <v-btn color="primary" href="http://c-mic.mx">Volver al sitio web del C-MIC</v-btn>
+              <v-btn color="primary" to='inicio'>Volver al sitio web del C-MIC</v-btn>
             </v-flex>
             <v-flex class="text-xs-center">
               <v-btn color="primary" to="registroreunionanual">Registrarse en la 5a Reunión Anual</v-btn>
@@ -42,7 +42,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .fondo{
   background-repeat: no-repeat !important;
   background-position: center center !important;

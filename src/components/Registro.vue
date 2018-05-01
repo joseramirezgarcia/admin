@@ -887,7 +887,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .fondo{
   background-repeat: no-repeat !important;
   background-position: center center !important;

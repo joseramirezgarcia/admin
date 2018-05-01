@@ -9,13 +9,18 @@ import 'vuetify/dist/vuetify.min.css'
 import { store } from './store'
 import { fb } from './config/firebase'
 import VueFire from 'vuefire'
+import Chartkick from 'chartkick'
+import VueChartkick from 'vue-chartkick'
+
+Vue.use(VueChartkick, { Chartkick })
+
 Vue.use(VueFire)
 
 Vue.use(Vuetify, {
   theme: {
     primary: '#194e91',
     secondary: '#c41949',
-    error: '#c51a4a'
+    error: '#c41949'
   }
 })
 

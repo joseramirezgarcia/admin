@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-lg style="bacgroundColor=#FFFFFF">
+  <v-container fluid grid-list-lg my-3>
     <v-layout wrap row align-top fill-height>
       <v-flex xs12 sm6> 
         <v-card class="elevation-6" height="100%">
@@ -13,8 +13,8 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat color="secondary" class="elevation-6">Registrarse</v-btn>
-            <v-btn flat color="secondary">Mas información</v-btn>
+            <v-btn :to="{name: 'inscripcion'}" flat color="secondary" class="elevation-6">Registrarse</v-btn>
+            <v-btn :to="{name: '5areunion'}" flat color="secondary">Mas información</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -41,7 +41,7 @@
                       <h2 class="headline text-xs-center my-2">{{item.nombre}}</h2>
                       <div class="text-xs-justify">{{item.texto}}</div>
                       <v-divider></v-divider>
-                      <v-btn small color="secondary" class="mx-0">Leer mas</v-btn>
+                      <v-btn small color="secondary" class="mx-0" :to="{name: '5areunion'}">Leer mas</v-btn>
                     </div>
                   </v-flex>
                 </v-layout>
@@ -51,72 +51,22 @@
         </v-carousel>
       </v-flex>
     </v-layout>
-    <v-layout row id="nosotros">
-      <v-flex xs12>
-        <v-card class="elevation-6">
-          <v-card-title primary-title>
-            <v-layout fluid justify-center>
-              <img
-                width="50%"
-                height="50%"
-                :src="img"
-              >
-            </v-layout>
-          </v-card-title>
-          <v-card-title primary-title>
-            <div>
-              <div class="headline primary--text">ACERCA DE NOSOTROS</div>
-            </div>
-          </v-card-title>
+    <v-layout row wrap align-top fill-height mb-5>
+      <v-flex xs12 sm12>
+        <v-toolbar dark color="primary">
+          <v-toolbar-title class="white--text mx-auto">¿Qué beneficios obtiene al ser miembro del Colegio?</v-toolbar-title>
+        </v-toolbar>
+        <v-card class="elevation-6" height="100%">
           <v-card-text>
-            El Colegio Mexicano para la Investigación del Cáncer® (C-MIC®) es una asociación civil, integrada por científicos reconocidos tanto a nivel nacional e internacional como líderes en el desarrollo de proyectos de investigación básica, clínica, traslacional, epidemiológica, farmacológica y social asociada al estudio del cáncer en sus diferentes manifestaciones y etapas.
+            <ul class="mx-3">
+              <li v-for="(b,index) in beneficios" :key="index">
+                {{b.beneficio}}
+              </li>
+            </ul>
           </v-card-text>
           <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="secondary" large class="elevation-6" @click.native="show = !show" v-if="!show">
-              Leer mas
-            </v-btn>
+            <v-btn :to="{name: 'registro'}" large color="primary" class="elevation-6">Registrarse</v-btn>
           </v-card-actions>
-          <v-slide-y-transition>
-            <v-card-text v-if="show">
-              <v-tabs
-                centered
-                slider-color="secondary"
-                v-model="tab"
-              >
-                <v-tab
-                  v-for="i in tabs"
-                  :key="i"
-                  :href="`#tab-${i.num}`"
-                >
-                  {{ i.nombre }}
-                </v-tab>
-              </v-tabs>
-              <v-tabs-items v-model="tab">
-                <v-tab-item
-                  v-for="i in tabs"
-                  :key="i"
-                  :id="`tab-${i.num}`"
-                >
-                  <v-card flat>
-                    <v-card-text v-if="typeof i.texto !== 'object'">{{i.texto}}</v-card-text>
-                    <v-card-text v-else>
-                      <v-list>
-                        <v-list-tile v-for="l in i.texto" :key="l">
-                          <v-list-tile-action>
-                            <v-icon small>fiber_manual_record</v-icon> 
-                          </v-list-tile-action>
-                          <v-list-tile-content>
-                            {{l.texto}}
-                          </v-list-tile-content>
-                        </v-list-tile>
-                      </v-list>
-                    </v-card-text>
-                  </v-card>
-                </v-tab-item>
-              </v-tabs-items>
-            </v-card-text>
-          </v-slide-y-transition>
         </v-card>
       </v-flex>
     </v-layout>
@@ -156,12 +106,12 @@
             texto: 'William C. Earnshaw completó su Ph.D. con Jonathan King en el MIT en 1977. Concluyo su formación posdoctoral en Cambridge con Aaron Klug y Ron Laskey y Geneva con Ulrich Laemmli y continuó con su formación por 13 años en la Facultad de Medicina Johns Hopkins en el Departamento de Biología Celular y Anatomía de Tom Pollard.'
           }
         ],
-        tab: 'tab-1',
-        tabs: [
-          {num: 1, nombre: 'Historia', texto: 'El Colegio Mexicano para la Investigación del Cáncer® (C-MIC®) surge de la iniciativa de investigadores mexicanos para unificar los esfuerzos que se realizan en el desarrollo de proyectos en cáncer a nivel nacional. El 17 de junio de 2015 se llevó a cabo la primera reunión del C-MIC® en las instalaciones del Instituto Nacional de Cancerología, a la cual acudieron 45 investigadores, jefes de grupo, de distintas instituciones académicas. Actualmente, el C-MIC® cuenta con 744 miembros, entre investigadores, estudiantes y no académicos, y está presente en 17 estados de la República en diversas instituciones académicas de importancia nacional.'},
-          {num: 2, nombre: 'Misión', texto: 'Promover la vinculación institucional y personal entre la comunidad científica que realiza investigación en cáncer a nivel nacional.'},
-          {num: 3, nombre: 'Visión', texto: 'Ser la asociación que concentre a todos los actuales y futuros científicos interesados en el desarrollo de proyectos de investigación en cáncer, consolidándose como un referente a nivel nacional e internacional.'},
-          {num: 4, nombre: 'Estrategias', texto: [{texto: 'Establecer la vinculación institucional entre la comunidad científica que realiza investigación en cáncer a nivel nacional.'}, {texto: 'Aumentar del alcance nacional del Colegio mediante la incorporación de nuevos institutos y centros de investigación.'}, {texto: 'Fomentar la formación y especialización de recursos humanos para el desarrollo de investigación de alta calidad.'}, {texto: 'Difundir la información generada a la sociedad mexicana mediante artículos de divulgación y spots informativos.'}, {texto: 'Elaboración de manuales de métodos de investigación con el fin de homogenizar nuestra forma de trabajo y facilitar la interacción.'}]}
+        beneficios: [
+          {beneficio: 'Pertenecer a una comunidad científica que realiza investigación en cáncer a nivel nacional y con proyección internacional.'},
+          {beneficio: 'Ser invitado al Congreso anual, lo que te permite establecer una relación directa con ponentes internacionales. Los mejores investigadores a nivel internacional estarán ahí para compartir sus últimos avances científicos.'},
+          {beneficio: 'Participar de reuniones para estudiantes una vez al mes, donde un investigador reconocido expone un tema de interés y después hay un encuentro para hacer networking con otros estudiantes.'},
+          {beneficio: 'Tener acceso a convocatorias exclusivas para estudios en el extranjero.'},
+          {beneficio: 'Dar a conocer tu trabajo a través de artículos de divulgación y presencia en medios.'}
         ]
       }
     }
@@ -170,17 +120,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 a {
   color: #42b983;
 }
