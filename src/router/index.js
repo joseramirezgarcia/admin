@@ -5,6 +5,8 @@ import firebase from 'firebase'
 const routerOptions = [
   { path: '/', component: 'Inicio' },
   { path: '/inicio', component: 'Inicio', name: 'inicio' },
+  { path: '/nosotros', component: 'Nosotros', name: 'nosotros' },
+  { path: '/difusion', component: 'Difusion', name: 'difusion' },
   { path: '/registro', component: 'Registro', name: 'registro' },
   { path: '/confirmacion', component: 'Confirmacion', name: 'confirmacion', props: true },
   { path: '/registroreunionanual', component: 'RegistroReunionAnual', name: 'registroreunionanual' },

@@ -81,7 +81,7 @@
             <v-flex
               v-for="(col, i) in rows"
               :key="i"
-              xs3
+              xs12 sm4
             >
               <span class="body-2 secondary--text" v-text="col.title.toUpperCase()"></span>
               <div
@@ -90,7 +90,7 @@
                 v-text="child"
               ></div>
             </v-flex>
-            <v-flex xs3 layout column>
+            <v-flex xs12 sm4 layout column>
               <span class="body-2 secondary--text">CONTACTO</span>
               <div>
                 <v-icon size="18px" class="mr-3">fa fa-home</v-icon>
@@ -128,10 +128,6 @@ export default {
       rows: [
         {
           title: 'C-MIC',
-          children: ['COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER']
-        },
-        {
-          title: 'Secciones',
           children: ['Nosotros', 'Difusión', 'Convocatorias', 'Miembros', 'Contacto']
         },
         {
@@ -154,8 +150,8 @@ export default {
         return [{ title: 'Inicio', path: '/home', icon: 'home' }]
       } else {
         return [
-          { title: 'Nosotros', path: '/Registro', icon: 'face' },
-          { title: 'Difusión', path: '/Registro', icon: 'lock_open' },
+          { title: 'Nosotros', path: '/Nosotros', icon: 'face' },
+          { title: 'Difusión', path: '/Difusion', icon: 'lock_open' },
           { title: 'Convocatorias', path: '/Registro', icon: 'lock_open' },
           { title: 'Miembros', path: '/Registro', icon: 'lock_open' },
           { title: 'Contacto', path: '/Registro', icon: 'lock_open' }
