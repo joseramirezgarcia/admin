@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-layout row wrap my-5>
+    <v-layout row wrap style="margin-top:168px">
       <v-flex xs12 md8 offset-md2>
         <v-form v-model="formaMensaje" ref="formaMensaje">
           <v-card class="elevation-12">

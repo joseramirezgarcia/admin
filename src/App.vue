@@ -1,67 +1,105 @@
 <template>
   <v-app>
 
-    <v-card flat class="elevation-6 mb-0">
-      <v-navigation-drawer v-model='sidebar' app>
-        <v-list>
-          <v-list-tile
-            v-for='item in menuItems'
-            :key='item.title'
-            :to='item.path'>
-            <v-list-tile-content>{{ item.title }}</v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile @click='userSignOut'>
-            <v-list-tile-action>
-              <v-icon>exit_to_app</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>Salir</v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </v-navigation-drawer>      
-      <v-toolbar flat extended color="blue-grey lighten-5">
-        <v-toolbar-side-icon class='hidden-sm-and-up primary--text' @click='sidebar = !sidebar'></v-toolbar-side-icon>
-        <v-toolbar-title class="pt-3"> 
-          <router-link to='/' tag='span' style='cursor: pointer' title="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
-            <img src="@/assets/C-MIC.png" width="19%" alt="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
-          </router-link>
-        </v-toolbar-title>
-        <v-toolbar-items class="pt-2">
-          <v-btn color="secondary" :to="{name: 'inscripcion'}">
-            Registrate en la 5a Reunión Anual
-          </v-btn>
-        </v-toolbar-items>
-        <v-toolbar-title class="caption mx-auto primary--text" slot="extension">
-          COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER
-        </v-toolbar-title>
-      </v-toolbar>
-      <v-layout row class="hidden-sm-and-down">
-        <v-flex xs12 md10 offset-md1>
-          <v-card class="card--flex-toolbar">
-            <v-toolbar card prominent color="primary" dense :style="{ 'background': 'url(\'' + image + '\') ' }" class='fondo'>
-              <v-toolbar-items class="hidden-sm-and-down mx-auto">
-                <v-btn
-                  v-if="typeof item.submenus === 'undefined'"
-                  color="white"
-                  flat
-                  v-for='item in menuItems'
-                  :key='item.title'
-                  :to='item.path'>
-                  {{ item.title }}
-                </v-btn>
-                <v-menu open-on-hover bottom offset-y v-else>
-                  <v-btn flat color="white" slot="activator">{{item.title}}</v-btn>
-                  <v-list>
-                    <v-list-tile color="primary" v-for="(s,index) in item.submenus" :key="index" :to="{name: s.path}">
-                      <v-list-tile-title>{{ s.title }}</v-list-tile-title>
-                    </v-list-tile>
-                  </v-list>
-                </v-menu>
-              </v-toolbar-items> 
-            </v-toolbar>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-card>    
+    <v-layout row wrap fluid v-if="micrositio5areunion">
+      <v-flex xs12 sm12 md12 lg12 fluid>
+        <v-toolbar color="primary" fixed>
+          <v-toolbar-title class="white--text">
+            <img :src="logo5areunion" width="90vw" alt="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+          </v-toolbar-title>          
+                    <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn
+              color="white"
+              flat
+              large
+              v-for='item in menuItems'
+              :key='item.title'
+              :to='item.path'>
+              {{ item.title }}
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+      </v-flex>
+    </v-layout>
+
+    <v-layout row wrap fluid v-else>
+      <v-flex xs12 sm12 md12 lg12 fluid>
+        <v-toolbar flat fixed color="action">
+          <v-toolbar-title class="white--text mx-auto hidden-sm-and-down"> 
+            REGISTRATE A LA 5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER
+            <v-btn class="primary" :to="{name: 'inscripcion'}">click aquí</v-btn>
+          </v-toolbar-title>   
+          <v-toolbar-title class="white--text hidden-md-and-up"> 
+            <v-spacer></v-spacer>
+            <v-btn small class="primary" style="font-size:10px" :to="{name: 'inscripcion'}">REGISTRATE A LA 5A REUNIÓN ANUAL DEL C-MIC</v-btn>
+            <v-spacer></v-spacer>
+          </v-toolbar-title>          
+        </v-toolbar>
+      </v-flex>
+      <v-flex xs12 sm12 md12 lg12 fluid>
+        <v-toolbar flat dense fixed style="margin-top:56px" color="white">
+          <v-spacer class="hidden-md-and-up"></v-spacer>
+          <v-toolbar-title class="white--text"> 
+            <router-link to='/' tag='span' style='cursor: pointer' title="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+              <img src="@/assets/C-MIC.png" width="90vw" alt="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+            </router-link>
+          </v-toolbar-title>          
+          <v-spacer class="hidden-md-and-up"></v-spacer>
+        </v-toolbar>
+      </v-flex>
+      <v-flex xs12 sm12 md12 lg12 fluid>
+        <v-toolbar flat fixed style="margin-top:104px" color="white" class="hidden-sm-and-down">
+          <v-spacer class="hidden-md-and-up"></v-spacer>
+            <v-toolbar-items class="mx-auto">
+              <v-btn
+                v-if="typeof item.submenus === 'undefined'"
+                color="secondary"
+                flat
+                large
+                v-for='item in menuItems'
+                :key='item.title'
+                :to='item.path'>
+                {{ item.title }}
+              </v-btn>
+              <v-menu open-on-hover bottom offset-y v-else>
+                <v-btn flat color="secondary" large slot="activator">{{item.title}}</v-btn>
+                <v-list>
+                  <v-list-tile color="secondary" v-for="(s,index) in item.submenus" :key="index" :to="{name: s.path}">
+                    <v-list-tile-title>{{ s.title }}</v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
+            </v-toolbar-items>           
+          <v-spacer class="hidden-md-and-up"></v-spacer>
+        </v-toolbar>
+      </v-flex>
+      <v-flex xs12 sm12 md12 lg12 fluid>
+        <v-toolbar flat fixed style="margin-top:104px" color="white" class="hidden-md-and-up">
+            <v-toolbar-items>
+              <v-btn
+                v-if="typeof item.submenus === 'undefined'"
+                color="secondary"
+                flat
+                small
+                style="font-size:1.8vh; margin:0"
+                v-for='item in menuItems'
+                :key='item.title'
+                :to='item.path'>
+                {{ item.title }}
+              </v-btn>
+              <v-menu open-on-hover bottom offset-y v-else>
+                <v-btn flat color="secondary" style="font-size:1.8vh; margin:0" small slot="activator">{{item.title}}</v-btn>
+                <v-list>
+                  <v-list-tile color="secondary" v-for="(s,index) in item.submenus" :key="index" :to="{name: s.path}">
+                    <v-list-tile-title>{{ s.title }}</v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
+            </v-toolbar-items>           
+        </v-toolbar>
+      </v-flex>                    
+    </v-layout>    
 
     <v-content>
       <router-view></router-view>
@@ -69,9 +107,10 @@
     
     <v-footer height="auto" class="mt-0">
       <v-card flat tile class="flex">
-        <v-card-title class="secondary white--text">
+        <v-card-title class="tertiary white--text">
           <strong class="subheading">COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER</strong>
           <v-spacer></v-spacer>
+          <a href="http://microscopia.c-mic.mx/"><img src="http://c-mic.mx/images/cima_a.png" width="90vw"></a>
           <v-btn
             v-for="icon in icons"
             :key="icon"
@@ -128,7 +167,7 @@
           </v-layout>
         </v-card-text>
         <v-card-actions class="blue-grey lighten-3 justify-center">
-          &copy;{{año}}—<strong>C-MIC</strong> | TODOS LOS DERECHOS RESERVADOS.
+          <span style="white-space: nowrap">&copy;{{año}}—<strong>C-MIC</strong></span> | TODOS LOS DERECHOS RESERVADOS.
         </v-card-actions>
       </v-card>
     </v-footer>
@@ -138,12 +177,14 @@
 
 <script>
 import fondo from './assets/5reunionanual.jpg'
+import logo5areunion from './assets/logo5areunion.png'
 
 export default {
   data () {
     return {
       sidebar: false,
       image: fondo,
+      logo5areunion: logo5areunion,
       icons: ['fa fa-facebook', 'fa fa-twitter'],
       rows: [
         {
@@ -154,6 +195,9 @@ export default {
     }
   },
   computed: {
+    micrositio5areunion () {
+      return /5areunion/.test(this.$route.path)
+    },
     appTitle () {
       return this.$store.state.appTitle
     },
@@ -161,13 +205,14 @@ export default {
       return this.$store.getters.isAuthenticated
     },
     menuItems () {
-      if (this.isAuthenticated) {
-        return [{ title: 'Inicio', path: '/home', icon: 'home' }]
+      if (this.micrositio5areunion) {
+        return [{ title: 'Registro', path: '/5areunion/registro', icon: 'home' }]
       } else {
         return [
           { title: 'Nosotros', path: '/Nosotros', icon: 'face' },
           { title: 'Difusión', path: '/Difusion', icon: 'lock_open' },
           /* { title: 'Convocatorias', path: '/Registro', icon: 'lock_open' }, */
+          { title: 'Avisos', path: '/Avisos', icon: 'lock_open', submenus: [{title: 'Convocatorias', path: 'convocatorias'}, {title: 'Próximos eventos', path: 'eventos'}] },
           { title: 'Miembros', path: '/Miembros', icon: 'lock_open', submenus: [{title: 'Registro', path: 'registro'}, {title: 'Directorio', path: 'directorio'}, {title: 'Investigadores', path: 'investigadores'}, {title: 'Estudiantes', path: 'estudiantes'}] },
           { title: 'Contacto', path: '/contacto', icon: 'lock_open' }
         ]
@@ -182,9 +227,10 @@ export default {
 }
 </script>
 <style>
-  .card--flex-toolbar {
-    margin-top: -48px;
-  }
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+.card--flex-toolbar {
+  margin-top: -48px;
+}
 .fondo{
   background-repeat: no-repeat !important;
   background-position: center top !important;
@@ -192,5 +238,19 @@ export default {
 }
 a{
   text-decoration: none;
+}
+.actioncall{
+  font-size: 2vw;
+  white-space: normal;
+  overflow: visible;
+}
+.VueCarousel-dot--active button.VueCarousel-dot-button{
+  background:#005090 !important;
+}
+.btn{
+  min-width:45px !important
+}
+#app {
+  font-family: 'Montserrat', sans-serif;
 }
 </style>

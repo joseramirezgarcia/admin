@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid my-5>
+  <v-container fluid>
     <v-layout wrap row align-top>
       <v-flex xs12>
         <h1 class="mb-5 display-2 primary--text text-xs-center">INVESTIGADORES</h1>
@@ -36,13 +36,13 @@
     </v-layout>
     <v-layout row wrap align-top fill-height my-5>
       <v-flex xs12 sm12>
-        <v-toolbar dark color="secondary">
+        <v-toolbar dark color="tertiary">
           <v-toolbar-title class="white--text mx-auto">Composición de los miembros del C-MIC</v-toolbar-title>
         </v-toolbar>
         <v-card class="elevation-6">
           <v-card-text>
-            <pie-chart :data="generos" :colors="['#194e91', '#c51a4a']"></pie-chart>
-            <pie-chart :data="grados" :colors="['#194e91', '#c51a4a', '#bebebe' ]"></pie-chart>
+            <pie-chart :data="generos" :colors="['#194e91', '#009CDE']"></pie-chart>
+            <pie-chart :data="grados" :colors="['#194e91', '#009CDE', '#bebebe' ]"></pie-chart>
           </v-card-text>
         </v-card>
       </v-flex>

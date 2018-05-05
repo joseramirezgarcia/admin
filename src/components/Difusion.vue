@@ -1,6 +1,6 @@
 <template>
-  <v-layout my-5>
-    <v-flex xs12 sm10 offset-sm1>
+  <v-layout>
+    <v-flex xs12 sm10 offset-sm1 style="margin-top:168px">
       <h1 class="mb-5 display-2 primary--text text-xs-center">DIFUSIÓN</h1>
         <v-expansion-panel>
           <v-expansion-panel-content v-for="(i,index) in items" :key="index">

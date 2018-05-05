@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-lg style="bacgroundColor=#FFFFFF">
-    <v-layout row id="nosotros" my-5>
+    <v-layout row id="nosotros" style="margin-top:168px">
       <v-flex xs12>
         <h1 class="mb-5 display-2 primary--text text-xs-center">NOSOTROS</h1>
         <v-card class="elevation-6">
@@ -18,25 +18,23 @@
               <div class="headline primary--text">Acerca de nosotros</div>
             </div>
           </v-card-title>
-          <v-card-text>
+          <v-card-text class="title" style="text-align:justify">
             El Colegio Mexicano para la Investigación del Cáncer® (C-MIC®) es una asociación civil, integrada por científicos reconocidos tanto a nivel nacional e internacional como líderes en el desarrollo de proyectos de investigación básica, clínica, traslacional, epidemiológica, farmacológica y social asociada al estudio del cáncer en sus diferentes manifestaciones y etapas.
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="secondary" large class="elevation-6" @click.native="show = !show" v-if="!show">
-              Leer mas
-            </v-btn>
           </v-card-actions>
           <v-slide-y-transition>
-            <v-card-text v-if="show">
+            <v-card-text>
               <v-tabs
                 centered
                 slider-color="secondary"
                 v-model="tab"
               >
                 <v-tab
-                  v-for="i in tabs"
-                  :key="i"
+                  class="primary--text"
+                  v-for="(i,index) in tabs"
+                  :key="index"
                   :href="`#tab-${i.num}`"
                 >
                   {{ i.nombre }}
@@ -44,15 +42,15 @@
               </v-tabs>
               <v-tabs-items v-model="tab">
                 <v-tab-item
-                  v-for="i in tabs"
-                  :key="i"
+                  v-for="(i,index) in tabs"
+                  :key="index"
                   :id="`tab-${i.num}`"
                 >
                   <v-card flat>
-                    <v-card-text v-if="typeof i.texto !== 'object'">{{i.texto}}</v-card-text>
+                    <v-card-text v-if="typeof i.texto !== 'object'" style="text-align:justify">{{i.texto}}</v-card-text>
                     <v-card-text v-else>
-                      <ul class="mx-5">
-                        <li v-for="l in i.texto" :key="l">
+                      <ul class="mx-3">
+                        <li v-for="(l,index) in i.texto" :key="index" style="text-align:justify">
                           {{l.texto}}
                         </li>
                       </ul>
@@ -75,7 +73,6 @@
     data () {
       return {
         img: logo,
-        show: false,
         tab: 'tab-1',
         tabs: [
           {num: 1, nombre: 'Historia', texto: 'El Colegio Mexicano para la Investigación del Cáncer® (C-MIC®) surge de la iniciativa de investigadores mexicanos para unificar los esfuerzos que se realizan en el desarrollo de proyectos en cáncer a nivel nacional. El 17 de junio de 2015 se llevó a cabo la primera reunión del C-MIC® en las instalaciones del Instituto Nacional de Cancerología, a la cual acudieron 45 investigadores, jefes de grupo, de distintas instituciones académicas. Actualmente, el C-MIC® cuenta con 744 miembros, entre investigadores, estudiantes y no académicos, y está presente en 17 estados de la República en diversas instituciones académicas de importancia nacional.'},

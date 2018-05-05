@@ -11,6 +11,9 @@ import { fb } from './config/firebase'
 import VueFire from 'vuefire'
 import Chartkick from 'chartkick'
 import VueChartkick from 'vue-chartkick'
+import VueCarousel from 'vue-carousel'
+
+Vue.use(VueCarousel)
 
 Vue.use(VueChartkick, { Chartkick })
 
@@ -18,9 +21,11 @@ Vue.use(VueFire)
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#194e91',
-    secondary: '#c41949',
-    error: '#c41949'
+    primary: '#005090',
+    secondary: '#cf274e',
+    error: '#cf274e',
+    action: '#cf274e',
+    tertiary: '#009CDE'
   }
 })
 

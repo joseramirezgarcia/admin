@@ -3,10 +3,8 @@
     <v-flex xs12>
       <div class="text-xs-center" color="white" style="margin-top:168px">
         |
-        <router-link :to="{name: 'registro'}">Registro</router-link> | 
-        <router-link :to="{name: 'directorio'}">Directorio</router-link> | 
-        <router-link :to="{name: 'investigadores'}">Investigadores</router-link> | 
-        <router-link :to="{name: 'estudiantes'}">Estudiantes</router-link> | 
+        <router-link :to="{name: 'convocatorias'}">Convocatorias</router-link> | 
+        <router-link :to="{name: 'eventos'}">Próximos eventos</router-link> | 
       </div>
     </v-flex>
     <router-view></router-view>

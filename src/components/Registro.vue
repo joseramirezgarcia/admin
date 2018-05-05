@@ -6,6 +6,25 @@
           <v-toolbar dark color="primary">
             <v-toolbar-title>Registro de nuevos miembros CMIC</v-toolbar-title>
           </v-toolbar>
+          <v-card-text>
+            <div style="text-align:justify">
+              <h2>¿Qué beneficios obtiene al ser miembro del Colegio?</h2>
+              <ul class="mx-3">
+                <li>Pertenecer a una comunidad científica que realiza investigación en cáncer a
+                nivel nacional y con proyección internacional.</li>
+                <li>Ser invitado al Congreso anual, lo que te permite establecer una relación
+                directa con ponentes internacionales. Los mejores investigadores a nivel
+                internacional estarán ahí para compartir sus últimos avances científicos.</li>
+                <li>Participar de reuniones para estudiantes una vez al mes, donde un investigador
+                reconocido expone un tema de interés y después hay un encuentro para hacer
+                networking con otros estudiantes.</li>
+                <li>Tener acceso a convocatorias exclusivas para estudios en el extranjero.</li>
+                <li>Dar a conocer tu trabajo a través de artículos de divulgación y presencia en
+                medios.</li>
+              </ul>
+            </div>
+          </v-card-text>
+          <v-divider></v-divider>
           <v-form v-model="formaMiembros" ref="formaMiembros">
             <v-card-title fill-height>
               <v-spacer></v-spacer>

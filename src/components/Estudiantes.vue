@@ -1,6 +1,6 @@
 <template>
-  <v-layout my-5>
-    <v-flex xs12 sm10 offset-sm1>
+  <v-layout>
+    <v-flex xs12 sm10 offset-sm1 mb-5>
       <h1 class="mb-5 display-2 primary--text text-xs-center">ESTUDIANTES</h1>
       <v-card class="elevation-12">
         <v-card-media :src="imagen" height="200px">
@@ -14,7 +14,7 @@
             <h3 class="headline">Objetivos Generales</h3>
             <p>Generar una red de estudiantes que realicen investigación enfocada al entendimiento, prevención, diagnóstico y tratamiento del cáncer dentro de los distintos centros especializados del país.</p>
             <h3 class="headline">Objetivos Particulares</h3>
-            <ul class="mx-5">
+            <ul class="mx-3">
               <li>Buscar fuentes de financiamientos para los alumnos que realicen trabajos en investigación en cáncer.</li>
               <li>Identificar y concentrar la oferta educativa actual para formar futuros científicos en el área, tanto de pre-grado como de posgrado asociados a la investigación del cáncer.</li>
               <li>Realizar reuniones que permitan la interacción científica y social entre los estudiantes del colegio.</li>
@@ -37,3 +37,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  p, li {
+    text-align: justify;
+  }
+</style>
