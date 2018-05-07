@@ -1,9 +1,9 @@
 <template>
   <v-container fluid fill-height :style="{ 'background': 'url(\'' + image + '\') ' }" class='fondo'>
-    <v-layout justify-center style="margin-top:168px">
+    <v-layout justify-center style="margin-top:120px">
       <v-flex xs12 sm10 md10 lg10>
         <v-card class="elevation-24">
-          <v-toolbar dark color="primary" style="margin-top:168px">
+          <v-toolbar dark color="primary" class="my-5">
             <v-toolbar-title>Registro 5a Reunión Anual del Colegio Mexicano para la Investigación del Cáncer</v-toolbar-title>
           </v-toolbar>
           <v-form ref="formaMiembros">

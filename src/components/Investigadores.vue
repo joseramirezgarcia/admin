@@ -12,14 +12,16 @@
               <v-flex xs6>
                 <geo-chart 
                   :data="chartData" 
-                  :colors="['#c51a4a', '#194e91']"
+                  :colors="['#194e91', '#194e91']"
                   :library="{
                     region: 'MX', 
                     resolution: 'provinces', 
-                    tooltip: {
-                      pointFormat: 'Awesome values: <b>{capital}</b>'
-                    }
-                  }">
+                    /*tooltip: {
+                      pointFormat: ': <b>{capital}</b>'
+                    }*/
+                  }"
+                  label="Investigadores"
+                  >
                 </geo-chart>
               </v-flex>
               <v-flex xs6>
@@ -84,8 +86,19 @@ export default {
       for (let m of this.miembros) {
         if (m.tipo === 'INVESTIGADOR') {
           if (m.pais === 'MEXICO' && this.estados.filter(e => e === m.entidad).length < 1) {
+            let entidad = m.entidad
+            if (entidad === 'CIUDAD DE MEXICO') {
+              entidad = 'DISTRITO FEDERAL'
+            } else if (entidad === 'ESTADO DE MEXICO') {
+              entidad = 'ESTADO DE MÉXICO'
+            } else if (entidad === 'NUEVO LEON') {
+              entidad = 'NUEVO LEÓN'
+            } else if (entidad === 'YUCATAN') {
+              entidad = 'YUCATÁN'
+            }
             this.estados.push(m.entidad)
-            this.chartData.push([m.entidad, 100])
+            let numero = this.miembros.filter(n => n.entidad === m.entidad).length
+            this.chartData.push([entidad, numero])
           }
           if (m.genero === 'MASCULINO') {
             this.hombres++

@@ -16,6 +16,8 @@
     "font-awesome": "^4.7.0",
     "paypal-checkout": "^4.0.198",
     "vue": "^2.5.2",
+    "vue-accordion": "^1.0.0",
+    "vue-carousel": "^0.7.3",
     "vue-chartkick": "^0.3.1",
     "vue-router": "^3.0.1",
     "vuefire": "^1.4.5",

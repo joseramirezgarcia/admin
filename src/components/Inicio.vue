@@ -1,10 +1,10 @@
 <template>
   <carousel :loop="true" :autoplay="true" :autoplayTimeout="3000" :autoplayHoverPause="true" :perPage="1" style="margin-top:168px">
-    <slide :style="{ 'background': 'url(\'' + banner1 + '\') ' }" class='fondo' style="height:70vw">
-      <router-link :to="{name: 'registro'}" tag='span' class="enlace"></router-link>
+    <slide :style="{ 'background': 'url(\'' + banner1 + '\') ' }" class='fondo' style="height:50vw">
+      <router-link :to="{name: '5areunion'}" tag='span' class="enlace"></router-link>
     </slide>
     <slide :style="{ 'background': 'url(\'' + banner2 + '\') ' }" class='fondo'>
-      <router-link :to="{name: 'registro'}" tag='span' class="enlace"></router-link>
+      <router-link :to="{name: 'ponentes'}" tag='span' class="enlace"></router-link>
     </slide>
     <slide :style="{ 'background': 'url(\'' + banner3 + '\') ' }" class='fondo'>
     </slide>    

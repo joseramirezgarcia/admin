@@ -3,21 +3,46 @@
 
     <v-layout row wrap fluid v-if="micrositio5areunion">
       <v-flex xs12 sm12 md12 lg12 fluid>
-        <v-toolbar color="primary" fixed>
-          <v-toolbar-title class="white--text">
-            <img :src="logo5areunion" width="90vw" alt="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+        <v-toolbar flat fixed color="action">
+          <v-toolbar-title class="white--text mx-auto hidden-sm-and-down body-1"> 
+            REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER
+            <v-btn class="primary" :to="{name: 'inscripcion'}">click aquí</v-btn>
+          </v-toolbar-title>   
+          <v-toolbar-title class="white--text hidden-md-and-up mx-auto"> 
+            <v-spacer></v-spacer>
+            <v-btn small class="primary" style="font-size:10px" :to="{name: 'inscripcion'}">REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL C-MIC</v-btn>
+            <v-spacer></v-spacer>
           </v-toolbar-title>          
-                    <v-spacer></v-spacer>
-          <v-toolbar-items>
+        </v-toolbar>
+      </v-flex>
+      <v-flex xs12 sm12 md12 lg12 fluid>
+        <v-toolbar color="primary5areunion" style="margin-top:56px" fixed>
+          <v-toolbar-title class="white--text">
+            <router-link to='/5areunion' tag='span' style='cursor: pointer' title="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+              <img :src="logo5areunion" width="80vw" alt="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+            </router-link>
+          </v-toolbar-title>          
+          <v-spacer></v-spacer>
+          <v-toolbar-items class="hidden-sm-and-down">
             <v-btn
               color="white"
               flat
-              large
+              medium
               v-for='item in menuItems'
               :key='item.title'
               :to='item.path'>
               {{ item.title }}
             </v-btn>
+          </v-toolbar-items>
+          <v-toolbar-items class="hidden-md-and-up">
+            <v-menu bottom offset-y>
+              <v-btn flat color="white" large slot="activator">&nbsp;<v-icon>menu</v-icon></v-btn>
+              <v-list>
+                <v-list-tile color="primary5areunion" v-for="(item,index) in menuItems" :key="index" :to='item.path'>
+                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
           </v-toolbar-items>
         </v-toolbar>
       </v-flex>
@@ -26,100 +51,97 @@
     <v-layout row wrap fluid v-else>
       <v-flex xs12 sm12 md12 lg12 fluid>
         <v-toolbar flat fixed color="action">
-          <v-toolbar-title class="white--text mx-auto hidden-sm-and-down"> 
-            REGISTRATE A LA 5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER
+          <v-toolbar-title class="white--text mx-auto hidden-sm-and-down body-1"> 
+            REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER
             <v-btn class="primary" :to="{name: 'inscripcion'}">click aquí</v-btn>
           </v-toolbar-title>   
-          <v-toolbar-title class="white--text hidden-md-and-up"> 
+          <v-toolbar-title class="white--text hidden-md-and-up mx-auto"> 
             <v-spacer></v-spacer>
-            <v-btn small class="primary" style="font-size:10px" :to="{name: 'inscripcion'}">REGISTRATE A LA 5A REUNIÓN ANUAL DEL C-MIC</v-btn>
+            <v-btn small class="primary" style="font-size:10px" :to="{name: 'inscripcion'}">REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL C-MIC</v-btn>
             <v-spacer></v-spacer>
           </v-toolbar-title>          
         </v-toolbar>
       </v-flex>
       <v-flex xs12 sm12 md12 lg12 fluid>
         <v-toolbar flat dense fixed style="margin-top:56px" color="white">
-          <v-spacer class="hidden-md-and-up"></v-spacer>
           <v-toolbar-title class="white--text"> 
             <router-link to='/' tag='span' style='cursor: pointer' title="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
               <img src="@/assets/C-MIC.png" width="90vw" alt="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
             </router-link>
           </v-toolbar-title>          
           <v-spacer class="hidden-md-and-up"></v-spacer>
+          <v-toolbar-items class="hidden-md-and-up">
+            <v-menu bottom offset-y>
+              <v-btn flat color="primary" large slot="activator">&nbsp;<v-icon>menu</v-icon></v-btn>
+              <v-list>
+                <v-list-tile color="primary5areunion" v-for="(item,index) in menuItems" :key="index" :to='item.path'>
+                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </v-toolbar-items>         
         </v-toolbar>
       </v-flex>
-      <v-flex xs12 sm12 md12 lg12 fluid>
-        <v-toolbar flat fixed style="margin-top:104px" color="white" class="hidden-sm-and-down">
-          <v-spacer class="hidden-md-and-up"></v-spacer>
-            <v-toolbar-items class="mx-auto">
-              <v-btn
-                v-if="typeof item.submenus === 'undefined'"
-                color="secondary"
-                flat
-                large
-                v-for='item in menuItems'
-                :key='item.title'
-                :to='item.path'>
-                {{ item.title }}
-              </v-btn>
-              <v-menu open-on-hover bottom offset-y v-else>
-                <v-btn flat color="secondary" large slot="activator">{{item.title}}</v-btn>
-                <v-list>
-                  <v-list-tile color="secondary" v-for="(s,index) in item.submenus" :key="index" :to="{name: s.path}">
-                    <v-list-tile-title>{{ s.title }}</v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-              </v-menu>
-            </v-toolbar-items>           
-          <v-spacer class="hidden-md-and-up"></v-spacer>
+      <v-flex xs12 sm12 md12 lg12 fluid class="hidden-sm-and-down">
+        <v-toolbar flat fixed style="margin-top:104px" color="white">
+          <v-toolbar-items class="mx-auto">
+            <v-btn
+              v-if="typeof item.submenus === 'undefined'"
+              color="primary"
+              flat
+              large
+              v-for='item in menuItems'
+              :key='item.title'
+              :to='item.path'>
+              {{ item.title }}
+            </v-btn>
+            <v-menu open-on-hover bottom offset-y v-else>
+              <v-btn flat color="primary" large slot="activator" :to='item.path'>{{item.title}}</v-btn>
+              <v-list>
+                <v-list-tile color="primary" v-for="(s,index) in item.submenus" :key="index" :to="{name: s.path}">
+                  <v-list-tile-title>{{ s.title }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </v-toolbar-items>  
         </v-toolbar>
       </v-flex>
-      <v-flex xs12 sm12 md12 lg12 fluid>
-        <v-toolbar flat fixed style="margin-top:104px" color="white" class="hidden-md-and-up">
-            <v-toolbar-items>
-              <v-btn
-                v-if="typeof item.submenus === 'undefined'"
-                color="secondary"
-                flat
-                small
-                style="font-size:1.8vh; margin:0"
-                v-for='item in menuItems'
-                :key='item.title'
-                :to='item.path'>
-                {{ item.title }}
-              </v-btn>
-              <v-menu open-on-hover bottom offset-y v-else>
-                <v-btn flat color="secondary" style="font-size:1.8vh; margin:0" small slot="activator">{{item.title}}</v-btn>
-                <v-list>
-                  <v-list-tile color="secondary" v-for="(s,index) in item.submenus" :key="index" :to="{name: s.path}">
-                    <v-list-tile-title>{{ s.title }}</v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-              </v-menu>
-            </v-toolbar-items>           
-        </v-toolbar>
-      </v-flex>                    
     </v-layout>    
 
     <v-content>
       <router-view></router-view>
     </v-content>
-    
-    <v-footer height="auto" class="mt-0">
+
+    <v-footer height="auto" class="mt-0 py-2" v-if="micrositio5areunion" color="tertiary">
+      <v-spacer></v-spacer>
+      <img src="http://5a-reunion.c-mic.mx/images/logos.png" style="max-width:30%">
+      <v-spacer></v-spacer>
+    </v-footer>
+
+    <v-footer height="auto" class="mt-0" v-else>
       <v-card flat tile class="flex">
         <v-card-title class="tertiary white--text">
           <strong class="subheading">COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER</strong>
           <v-spacer></v-spacer>
           <a href="http://microscopia.c-mic.mx/"><img src="http://c-mic.mx/images/cima_a.png" width="90vw"></a>
           <v-btn
-            v-for="icon in icons"
-            :key="icon"
             icon
             dark
             class="mx-3"
+            href="https://twitter.com/cmic_mex"
+            target="_blank"
           >
-            <v-icon size="24px">{{ icon }}</v-icon>
+            <v-icon size="24px">fa fa-twitter</v-icon>
           </v-btn>
+          <v-btn
+            icon
+            dark
+            class="mx-3"
+            href="https://www.facebook.com/CMICancer/"
+            target="_blank"
+          >
+            <v-icon size="24px">fa fa-facebook</v-icon>
+          </v-btn>          
         </v-card-title>
         <v-card-text class="blue-grey lighten-5">
           <v-layout>
@@ -135,6 +157,7 @@
                 :to="item.path" 
                 v-for='item in menuItems' 
                 :key='item.title' 
+                style="cursor: pointer"
               >
                 {{item.title}}
               </router-link>
@@ -158,10 +181,6 @@
                   <v-icon size="18px" class="mr-3">fa fa-envelope</v-icon>
                 </a>
                 reuniones@c-mic.mx
-              </div>
-              <div>
-                <v-icon size="18px" class="mr-3">fa fa-phone</v-icon>
-                + 01 234 456 78
               </div>
             </v-flex>
           </v-layout>
@@ -206,9 +225,19 @@ export default {
     },
     menuItems () {
       if (this.micrositio5areunion) {
-        return [{ title: 'Registro', path: '/5areunion/registro', icon: 'home' }]
+        return [
+          { title: 'C-MIC', path: '/', icon: 'home' },
+          { title: 'Inicio', path: '/5areunion', icon: 'home' },
+          { title: 'Invitacion', path: '/5areunion/invitacion', icon: 'home' },
+          { title: 'Ponentes', path: '/5areunion/ponentes', icon: 'home' },
+          { title: 'Regístrate', path: '/5areunion/inscripcion', icon: 'home' },
+          { title: 'Sede', path: '/5areunion/sede', icon: 'home' },
+          { title: 'Hospedaje', path: '/5areunion/hospedaje', icon: 'home' },
+          { title: 'Contacto', path: '/5areunion/contacto', icon: 'home' }
+        ]
       } else {
         return [
+          { title: 'Inicio', path: '/', icon: 'face' },
           { title: 'Nosotros', path: '/Nosotros', icon: 'face' },
           { title: 'Difusión', path: '/Difusion', icon: 'lock_open' },
           /* { title: 'Convocatorias', path: '/Registro', icon: 'lock_open' }, */
@@ -253,4 +282,5 @@ a{
 #app {
   font-family: 'Montserrat', sans-serif;
 }
+
 </style>

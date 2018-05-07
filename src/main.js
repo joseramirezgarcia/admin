@@ -12,6 +12,9 @@ import VueFire from 'vuefire'
 import Chartkick from 'chartkick'
 import VueChartkick from 'vue-chartkick'
 import VueCarousel from 'vue-carousel'
+import {vueAccordion} from 'vue-accordion'
+
+Vue.component('vue-accordion', vueAccordion)
 
 Vue.use(VueCarousel)
 
@@ -25,7 +28,9 @@ Vue.use(Vuetify, {
     secondary: '#cf274e',
     error: '#cf274e',
     action: '#cf274e',
-    tertiary: '#009CDE'
+    tertiary: '#009CDE',
+    primary5areunion: '#04436a',
+    secondary5areunion: '#3d449a'
   }
 })
 
