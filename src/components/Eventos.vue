@@ -53,6 +53,22 @@
             </v-card-actions>
         </v-card>
       </v-flex>
+      <v-flex xs12 sm6 offset-sm3>
+        <v-card class="elevation-12 my-3">
+            <v-card-media :src="evento3" height="200px">
+            </v-card-media>
+            <v-card-title primary-title>
+            <div>
+                <h3 class="headline mb-0">Seminario Medicina de Precisión en el Siglo XXI</h3>
+                <div>21 y 22 de mayo, 2018</div>
+                <div>Donceles 104, Centro histórico, CDMX</div>
+            </div>
+            </v-card-title>
+            <v-card-actions>
+            <v-btn flat color="secondary" href="http://c-mic.mx/PDF/Cartel%20Seminario%20Precision%20Medicine.pdf" target="_blank">Información</v-btn>
+            </v-card-actions>
+        </v-card>
+      </v-flex>      
     </v-layout>
   </v-container>
 </template>
@@ -61,13 +77,15 @@
 import evento0 from '../assets/5reunionanual.jpg'
 import evento1 from '../assets/evento1.jpg'
 import evento2 from '../assets/evento2.jpg'
+import evento3 from '../assets/evento3.jpg'
 
 export default {
   data () {
     return {
       evento0: evento0,
       evento1: evento1,
-      evento2: evento2
+      evento2: evento2,
+      evento3: evento3
     }
   }
 }

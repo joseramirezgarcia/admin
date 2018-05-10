@@ -1,6 +1,6 @@
 <template>
   <carousel :loop="true" :autoplay="true" :autoplayTimeout="3000" :autoplayHoverPause="true" :perPage="1" style="margin-top:168px">
-    <slide :style="{ 'background': 'url(\'' + banner1 + '\') ' }" class='fondo' style="height:50vw">
+    <slide :style="{ 'background': 'url(\'' + banner1 + '\') ' }" class='fondo' style="height:35vw">
       <router-link :to="{name: '5areunion'}" tag='span' class="enlace"></router-link>
     </slide>
     <slide :style="{ 'background': 'url(\'' + banner2 + '\') ' }" class='fondo'>
@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import imagen1 from '../assets/banner1.jpg'
-import imagen2 from '../assets/banner2.jpg'
-import imagen3 from '../assets/banner3.jpg'
+import imagen1 from '../assets/banner1.png'
+import imagen2 from '../assets/banner2.png'
+import imagen3 from '../assets/banner3.png'
 
 export default {
   data () {

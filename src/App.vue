@@ -228,7 +228,7 @@ export default {
         return [
           { title: 'C-MIC', path: '/', icon: 'home' },
           { title: 'Inicio', path: '/5areunion', icon: 'home' },
-          { title: 'Invitacion', path: '/5areunion/invitacion', icon: 'home' },
+          { title: 'Invitación', path: '/5areunion/invitacion', icon: 'home' },
           { title: 'Ponentes', path: '/5areunion/ponentes', icon: 'home' },
           { title: 'Regístrate', path: '/5areunion/inscripcion', icon: 'home' },
           { title: 'Sede', path: '/5areunion/sede', icon: 'home' },
@@ -241,7 +241,7 @@ export default {
           { title: 'Nosotros', path: '/Nosotros', icon: 'face' },
           { title: 'Difusión', path: '/Difusion', icon: 'lock_open' },
           /* { title: 'Convocatorias', path: '/Registro', icon: 'lock_open' }, */
-          { title: 'Avisos', path: '/Avisos', icon: 'lock_open', submenus: [{title: 'Convocatorias', path: 'convocatorias'}, {title: 'Próximos eventos', path: 'eventos'}] },
+          { title: 'Reuniones', path: '/Reuniones', icon: 'lock_open', submenus: [{title: 'Convocatorias', path: 'convocatorias'}, {title: 'Próximos eventos', path: 'eventos'}] },
           { title: 'Miembros', path: '/Miembros', icon: 'lock_open', submenus: [{title: 'Registro', path: 'registro'}, {title: 'Directorio', path: 'directorio'}, {title: 'Investigadores', path: 'investigadores'}, {title: 'Estudiantes', path: 'estudiantes'}] },
           { title: 'Contacto', path: '/contacto', icon: 'lock_open' }
         ]
