@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout column wrap>
-      <v-flex xs12 sm10 offset-sm1 style="margin-top:168px">
+      <v-flex xs12 sm10 offset-sm1 style="margin-top:104px">
         <h1 class="mb-5 display-2 primary--text text-xs-center">DIFUSIÓN</h1>
       </v-flex>
       <v-flex xs12 sm10 offset-sm1 align-justify text-xs-center>
@@ -65,7 +65,7 @@
       /* let that = this
       for (let i of this.items) {
         for (let a of i.archivos) {
-          axios.get('https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=' + a.id + '&key=AIzaSyDEtHVnX-1c8J0M1zWSGP2WtrnJCiC9E1Y')
+          axios.get('https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=' + a.id + '&key=')
           .then(response => {
             let info = response.data.items[0].snippet
             let todo = {id: a.id, tag: i.tag, titulo: info.title, descripcion: info.description}

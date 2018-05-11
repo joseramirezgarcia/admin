@@ -1,20 +1,43 @@
 <template>
-  <carousel :loop="true" :autoplay="true" :autoplayTimeout="3000" :autoplayHoverPause="true" :perPage="1" style="margin-top:168px">
-    <slide :style="{ 'background': 'url(\'' + banner1 + '\') ' }" class='fondo' style="height:35vw">
-      <router-link :to="{name: '5areunion'}" tag='span' class="enlace"></router-link>
+  <carousel :loop="true" :autoplay="true" :autoplayTimeout="3000" :autoplayHoverPause="true" :perPage="1" style="margin-top:104px">
+    <slide>
+      <img :src="banner3" style="width:100%">
     </slide>
-    <slide :style="{ 'background': 'url(\'' + banner2 + '\') ' }" class='fondo'>
-      <router-link :to="{name: 'ponentes'}" tag='span' class="enlace"></router-link>
+    <slide>
+      <router-link :to="{name: '5areunion'}" tag='span' class="enlace">
+        <img :src="banner1" style="width:100%">
+      </router-link>
     </slide>
-    <slide :style="{ 'background': 'url(\'' + banner3 + '\') ' }" class='fondo'>
+    <slide>
+      <router-link :to="{name: 'ponentes'}" tag='span' class="enlace">
+        <img :src="banner2" style="width:100%">
+      </router-link>
+    </slide>
+    <slide>
+      <a href="http://c-mic.mx/PDF/APEIC4oCongreso.pdf" target="_blank">
+        <img :src="banner5" style="width:100%">
+      </a>
+    </slide>
+    <slide>
+      <a href="http://c-mic.mx/PDF/SeminarioMedicinaPrecision.pdf" target="_blank">
+        <img :src="banner6" style="width:100%">
+      </a>
     </slide>    
+    <slide>
+      <a href="http://c-mic.mx/PDF/TallerBioinformatica.pdf" target="_blank">
+        <img :src="banner4" style="width:100%">
+      </a>
+    </slide>
   </carousel>
 </template>
 
 <script>
-import imagen1 from '../assets/banner1.png'
-import imagen2 from '../assets/banner2.png'
-import imagen3 from '../assets/banner3.png'
+import imagen1 from '../assets/banner01.jpg'
+import imagen2 from '../assets/banner02.jpg'
+import imagen3 from '../assets/banner03.jpg'
+import imagen4 from '../assets/banner04.jpg'
+import imagen5 from '../assets/banner05.jpg'
+import imagen6 from '../assets/banner06.jpg'
 
 export default {
   data () {
@@ -22,17 +45,9 @@ export default {
       banner1: imagen1,
       banner2: imagen2,
       banner3: imagen3,
-      items: [
-        {
-          src: imagen1
-        },
-        {
-          src: imagen2
-        },
-        {
-          src: imagen3
-        }
-      ]
+      banner4: imagen4,
+      banner5: imagen5,
+      banner6: imagen6
     }
   }
 }

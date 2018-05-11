@@ -16,10 +16,13 @@
         </v-toolbar>
       </v-flex>
       <v-flex xs12 sm12 md12 lg12 fluid>
-        <v-toolbar color="primary5areunion" style="margin-top:56px" fixed>
+        <v-toolbar color="primary5areunion" style="margin-top:56px; line-height: 1.0;" fixed>
           <v-toolbar-title class="white--text">
+            <router-link to='/' tag='span' style='cursor: pointer' title="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+              <img src="@/assets/C-MICblanco.png" width="90vw" alt="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+            </router-link>
             <router-link to='/5areunion' tag='span' style='cursor: pointer' title="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
-              <img :src="logo5areunion" width="80vw" alt="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+              <img :src="logo5areunion" width="90vw" alt="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
             </router-link>
           </v-toolbar-title>          
           <v-spacer></v-spacer>
@@ -80,11 +83,7 @@
               </v-list>
             </v-menu>
           </v-toolbar-items>         
-        </v-toolbar>
-      </v-flex>
-      <v-flex xs12 sm12 md12 lg12 fluid class="hidden-sm-and-down">
-        <v-toolbar flat fixed style="margin-top:104px" color="white">
-          <v-toolbar-items class="mx-auto">
+          <v-toolbar-items class="mx-auto hidden-sm-and-down">
             <v-btn
               v-if="typeof item.submenus === 'undefined'"
               color="primary"
@@ -103,7 +102,7 @@
                 </v-list-tile>
               </v-list>
             </v-menu>
-          </v-toolbar-items>  
+          </v-toolbar-items>
         </v-toolbar>
       </v-flex>
     </v-layout>    
@@ -226,7 +225,6 @@ export default {
     menuItems () {
       if (this.micrositio5areunion) {
         return [
-          { title: 'C-MIC', path: '/', icon: 'home' },
           { title: 'Inicio', path: '/5areunion', icon: 'home' },
           { title: 'Invitación', path: '/5areunion/invitacion', icon: 'home' },
           { title: 'Ponentes', path: '/5areunion/ponentes', icon: 'home' },

@@ -1,14 +1,16 @@
 <template>
   <v-content>
-    <v-layout v-if="inicio5areunion" style="height:100vh">
-      <v-flex :style="{ 'background': 'url(\'' + image + '\') ' }" class='fondo'></v-flex>
+    <v-layout wrap v-if="inicio5areunion">
+      <v-flex xs12 sm12 mb-5 class="align-start" style="margin-top:56px">
+        <img :src="image" style="max-width:100%">
+      </v-flex>
     </v-layout>
     <router-view v-else></router-view>
   </v-content>
 </template>
 
 <script>
-import fondo from '../assets/5reunionanual.jpg'
+import fondo from '../assets/banner01.jpg'
 
 export default {
   data () {

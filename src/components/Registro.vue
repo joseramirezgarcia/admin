@@ -289,7 +289,7 @@
                   v-model="privacidad"
                   required
                 >
-                  <span slot="label">Acepto los términos del <a href='http://cmic.prueba.cc/pdf/AvisoPrivacidad.pdf' target='_blank'>Aviso de Privacidad</a></span>
+                  <span slot="label">Acepto los términos del <a href='http://c-mic.mx/PDF/AvisoPrivacidad.pdf' target='_blank'>Aviso de Privacidad</a></span>
                 </v-checkbox>
               </v-flex>
             </v-card-text>   

@@ -13,7 +13,7 @@
             <img :src="i.image" alt="profile-sample4" class="profile elevation-24" />
             <h2>{{i.title}}</h2>
             <!-- <p>{{i.text}}</p> -->
-            <v-btn small outline color="primary" :href="'http://cmic.prueba.cc/pdf/' + i.url" target="_blank">Pdf <v-icon color="primary" right small>file_download</v-icon></v-btn>
+            <v-btn small outline color="primary" :href="'http://c-mic.mx/PDF/' + i.url" target="_blank">Pdf <v-icon color="primary" right small>file_download</v-icon></v-btn>
             <v-btn small color="primary" class="white--text" @click.native="abrirdialogo(i)">leer mas</v-btn>
           </figcaption>
         </figure>

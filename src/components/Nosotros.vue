@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-lg style="bacgroundColor=#FFFFFF">
-    <v-layout row id="nosotros" style="margin-top:168px">
+    <v-layout row id="nosotros" style="margin-top:104px">
       <v-flex xs12>
         <h1 class="mb-5 display-2 primary--text text-xs-center">NOSOTROS</h1>
         <v-card class="elevation-6">

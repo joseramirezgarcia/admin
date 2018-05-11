@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-flex xs12>
-      <div class="text-xs-center" color="white" style="margin-top:168px">
+      <div class="text-xs-center" color="white" style="margin-top:104px">
         |
         <router-link class="primary--text" :to="{name: 'registro'}">Registro</router-link> | 
         <router-link class="primary--text" :to="{name: 'directorio'}">Directorio</router-link> | 

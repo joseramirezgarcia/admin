@@ -189,6 +189,7 @@
 import { fb } from '../config/firebase'
 import paypal from 'paypal-checkout'
 import fondo from '../assets/5reunionanual.jpg'
+import { production } from '../config/paypal.js'
 
 let db = fb.database()
 let miembrosRef = db.ref('miembros')
@@ -309,7 +310,7 @@ export default {
   mounted () {
     let client = {
       sandbox: 'AQINkh8ISwostDwzArHwheo6PYGN3sYr3fW9aPpZ1Oukzqu3WDJ42nf0ou-oXv1YyiTfNu410L774Q2C',
-      production: ''
+      production: production
     }
     let payment = (data, actions) => {
       // Make a call to the REST api to create the payment
