@@ -113,7 +113,7 @@
 
     <v-footer height="auto" class="mt-0 py-2" v-if="micrositio5areunion" color="tertiary">
       <v-spacer></v-spacer>
-      <img src="http://5a-reunion.c-mic.mx/images/logos.png" style="max-width:30%">
+      <img src="@/assets/logos.png" style="max-width:30%">
       <v-spacer></v-spacer>
     </v-footer>
 
@@ -122,7 +122,7 @@
         <v-card-title class="tertiary white--text">
           <strong class="subheading">COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER</strong>
           <v-spacer></v-spacer>
-          <a href="http://microscopia.c-mic.mx/"><img src="http://c-mic.mx/images/cima_a.png" width="90vw"></a>
+          <!-- <a href="http://microscopia.c-mic.mx/"><img src="http://c-mic.mx/images/cima_a.png" width="90vw"></a>-->
           <v-btn
             icon
             dark

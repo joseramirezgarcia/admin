@@ -1,11 +1,13 @@
 <template>
-  <v-content>
-    <v-layout wrap v-if="inicio5areunion">
-      <v-flex xs12 sm12 mb-5 class="align-start" style="margin-top:56px">
-        <img :src="image" style="max-width:100%">
+  <v-container fluid v-if="inicio5areunion">
+    <v-layout justify-center align-center style="margin-top:5vh;">
+      <v-flex xs12 sm12 md12 class="text-sm-center">
+        <img :src="image" style="max-width:100%" class="mx-auto">
       </v-flex>
     </v-layout>
-    <router-view v-else></router-view>
+  </v-container>
+  <v-content v-else>
+    <router-view></router-view>
   </v-content>
 </template>
 

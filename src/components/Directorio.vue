@@ -24,7 +24,9 @@
           >
             <template slot='items' slot-scope='props'>
               <td>{{ props.item.membresia }}</td>
-              <td>{{ props.item.nombre }} {{ props.item.paterno }} {{ props.item.materno }}</td>
+              <td>{{ props.item.nombre }}</td>
+              <td>{{ props.item.paterno }}</td>
+              <td>{{ props.item.materno }}</td>
               <td>{{ props.item.tipo }}</td>
               <td>{{ props.item.grado }}</td>
               <td>{{ props.item.institucion }}</td>
@@ -64,6 +66,8 @@ export default {
       headers: [
         { text: 'Membresia', value: 'membresia' },
         { text: 'Nombre', value: 'nombre' },
+        { text: 'Apellido paterno', value: 'paterno' },
+        { text: 'Apellido materno', value: 'materno' },
         { text: 'Tipo', value: 'tipo' },
         { text: 'Grado', value: 'grado' },
         { text: 'Institucion', value: 'institucion' },
@@ -75,8 +79,13 @@ export default {
 }
 </script>
 
-<style>
-td {
-  white-space: nowrap
+<style scoped>
+table.table thead th {
+  padding: 0px 1% !important;
+}
+table.table tbody td {
+  text-align:left !important;
+  padding: 0px 1% !important;
+  white-space: nowrap !important;
 }
 </style>

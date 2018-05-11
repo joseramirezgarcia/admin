@@ -1,6 +1,6 @@
 <template>
   <v-container fluid fill-height :style="{ 'background': 'url(\'' + image + '\') ' }" class='fondo'>
-    <v-layout align-center justify-center>
+    <v-layout justify-center style="margin-top:280px">
       <v-flex xs12 sm10 md10>
         <v-card class="elevation-24">
           <v-card-text>
@@ -9,10 +9,10 @@
             </v-flex>
             <!--<pre>{{datos}}</pre>-->
             <v-flex class="text-xs-center">
-              <v-btn color="primary" to='inicio'>Volver al sitio web del C-MIC</v-btn>
+              <v-btn small style="font-size:10px" color="primary" to='/'>Volver al sitio web del C-MIC</v-btn>
             </v-flex>
             <v-flex class="text-xs-center">
-              <v-btn color="primary" to="registroreunionanual">Registrarse en la 5a Reunión Anual</v-btn>
+              <v-btn small style="font-size:10px" color="primary" :to="{name: 'inscripcion'}">Registrarse en la 5a Reunión Anual</v-btn>
             </v-flex>            
           </v-card-text>
         </v-card>
