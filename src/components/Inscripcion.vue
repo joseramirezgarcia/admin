@@ -190,6 +190,7 @@ import { fb } from '../config/firebase'
 import paypal from 'paypal-checkout'
 import fondo from '../assets/5reunionanual.jpg'
 import { production } from '../config/paypal.js'
+import axios from 'axios'
 
 let db = fb.database()
 let miembrosRef = db.ref('miembros')
@@ -279,6 +280,19 @@ export default {
         }
         this.codigo = hoy.slice(0, Math.round(hoy.length / 2)) + this.miembro.nombre.charAt(0) + this.miembro.paterno.charAt(0) + comida + this.miembro.materno.charAt(0) + '-' + hoy.slice(Math.round(hoy.length / 2), hoy.length)
       }
+    },
+    info (key) {
+      quintaReunionRef.child(key).on('value', function (snapshot) {
+        // console.log(snapshot.val())
+        if (snapshot.exists()) {
+          axios.get('http://c-mic.mx/jrg/index.php?registro=Pago', {
+            params: snapshot.val()
+          })
+          .then(function (response) {
+            // console.log(response)
+          })
+        }
+      })
     }
   },
   watch: {
@@ -309,7 +323,7 @@ export default {
   },
   mounted () {
     let client = {
-      sandbox: 'AQINkh8ISwostDwzArHwheo6PYGN3sYr3fW9aPpZ1Oukzqu3WDJ42nf0ou-oXv1YyiTfNu410L774Q2C',
+      sandbox: 'AQZvt9JFyOGEBK1HkM_MZBOBA9uw_cL9Aze6ERzD92moxDIvRU7mK5g6LbIC8Ok3yPSiEfnGBerv5XcZ',
       production: production
     }
     let payment = (data, actions) => {
@@ -353,7 +367,8 @@ export default {
           // console.log(payment)
           let respuesta = []
           respuesta = Object.assign(payment, miembro)
-          quintaReunionRef.push(respuesta)
+          let res = quintaReunionRef.push(respuesta)
+          that.info(res.key)
           // console.log(respuesta)
         } else {
           that.error = true

@@ -360,6 +360,7 @@
 <script>
 import { fb } from '../config/firebase'
 import fondo from '../assets/fondo.jpg'
+import axios from 'axios'
 
 let db = fb.database()
 let miembrosRef = db.ref('miembros')
@@ -885,9 +886,22 @@ export default {
         this.miembro.fecha = hoy
         // console.log(this.miembro)
         let res = miembrosRef.push(this.miembro)
-        // console.log(res.key)
+        this.info(res.key)
         self.$router.push({ name: 'confirmacion', params: { miembro: res.key } })
       }
+    },
+    info (key) {
+      miembrosRef.child(key).on('value', function (snapshot) {
+        // console.log(snapshot.val())
+        if (snapshot.exists()) {
+          axios.get('http://c-mic.mx/jrg/index.php?registro=Miembro', {
+            params: snapshot.val()
+          })
+          .then(function (response) {
+            // console.log(response)
+          })
+        }
+      })
     }
   },
   created () {

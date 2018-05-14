@@ -53,6 +53,7 @@
 
 <script>
 import { fb } from '../config/firebase'
+import axios from 'axios'
 
 let db = fb.database()
 let mensajesRef = db.ref('mensajes')
@@ -87,10 +88,24 @@ export default {
           mensaje: this.mensaje,
           fecha: hoy
         }
-        mensajesRef.push(mensaje)
+        let res = mensajesRef.push(mensaje)
+        this.info(res.key)
         this.$refs.formaMensaje.reset()
         this.success = true
       }
+    },
+    info (key) {
+      mensajesRef.child(key).on('value', function (snapshot) {
+        // console.log(snapshot.val())
+        if (snapshot.exists()) {
+          axios.get('http://c-mic.mx/jrg/index.php?registro=Mensaje', {
+            params: snapshot.val()
+          })
+          .then(function (response) {
+            // console.log(response)
+          })
+        }
+      })
     }
   },
   watch: {
