@@ -1,10 +1,10 @@
 <template>
-  <v-container fluid>
-    <v-layout row wrap>
-      <v-flex xs12 class='text-xs-center' mt-5>
-        <h1>Inicio</h1>
+  <v-container fluid fill-height>
+    <v-layout row wrap align-center justify-center style="margin-top:48px">
+      <v-flex xs12 class='text-xs-center' my-3>
+        <h1>Home</h1>
       </v-flex>
-      <v-flex xs12 class='text-xs-center' mt-3>
+      <v-flex xs12 class='text-xs-center'>
         <v-card>
           <v-card-title>
             Miembros
@@ -18,6 +18,8 @@
             ></v-text-field>
           </v-card-title>   
           <v-data-table
+            :rows-per-page-items="[10,25,50,100,{'text':'Todos','value':-1}]"
+            rows-per-page-text="Miembros por página: "
             :headers='headers'
             :items='miembros'
             class='elevation-1'
@@ -33,7 +35,7 @@
               <td>{{ props.item.membresia }}</td>
               <td>{{ props.item.fecha }}</td>
               <td>{{ props.item.campo }}</td>
-              <td>{{ props.item.area }}</td>
+              <td>{{ props.item.subcampo }}</td>
               <td>{{ props.item.tipo }}</td>            
               <td>{{ props.item.nombre }}</td>
               <td>{{ props.item.paterno }}</td>
@@ -44,6 +46,7 @@
               <td>{{ props.item.cvu }}</td>
               <td>{{ props.item.sni }}</td>
               <td>{{ props.item.nivel }}</td>
+              <td>{{ props.item.area }}</td>
               <td>{{ props.item.institucion }}</td>
               <td>{{ props.item.direccion }}</td>
               <td>{{ props.item.pais }}</td>
@@ -61,8 +64,16 @@
             </v-alert>                   
           </v-data-table>
         </v-card>
+        <download-excel
+          class   = "btn mt-5"
+          style   = "cursor:pointer"
+          :data   = "miembros"
+          :fields = "json_fields"
+          name    = "miembros.xls">
+          Descargar excel <v-icon right small>file_download</v-icon>
+        </download-excel>
         <v-dialog v-model="dialog" max-width="500px" @keydown.esc="dialog = false">
-          <v-btn slot="activator" class="my-5">Agregar Nuevo Miembro</v-btn>
+          <v-btn slot="activator" color="success" class="mt-5">Agregar Nuevo Miembro <v-icon right small>person_add</v-icon></v-btn>
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
@@ -77,13 +88,13 @@
                     <v-text-field label="Fecha" v-model="editedItem.fecha"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md6>
-                    <v-text-field label="Campo" v-model="editedItem.campo"></v-text-field>
+                    <v-text-field label="Campo de conocmiento" v-model="editedItem.campo"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md6>
-                    <v-text-field label="Area" v-model="editedItem.area"></v-text-field>
+                    <v-text-field label="Area de conocmiento" v-model="editedItem.area"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md6>
-                    <v-text-field label="Tipo" v-model="editedItem.tipo"></v-text-field>
+                    <v-text-field label="Tipo de miembro" v-model="editedItem.tipo"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md6>
                     <v-text-field label="Nombre" v-model="editedItem.nombre"></v-text-field>
@@ -131,26 +142,27 @@ export default {
         { text: 'Editar', value: 'editar', sortable: false },
         { text: 'Membresia', value: 'membresia' },
         { text: 'Fecha', value: 'fecha' },
-        { text: 'Campo', value: 'campo' },
-        { text: 'Area', value: 'area' },
-        { text: 'Tipo', value: 'tipo' },
+        { text: 'Campo de conocimiento', value: 'campo' },
+        { text: 'Area de conocimiento', value: 'subcampo' },
+        { text: 'Tipo de miembro', value: 'tipo' },
         { text: 'Nombre', value: 'nombre' },
         { text: 'Paterno', value: 'paterno' },
         { text: 'Materno', value: 'materno' },
         { text: 'Genero', value: 'genero' },
-        { text: 'Grado', value: 'grado' },
+        { text: 'Grado academico', value: 'grado' },
         { text: 'RFC', value: 'rfc' },
         { text: 'CVU', value: 'cvu' },
-        { text: 'SNI', value: 'sni' },
-        { text: 'Nivel', value: 'nivel' },
+        { text: 'Pertenece al SNI', value: 'sni' },
+        { text: 'Nivel SNI', value: 'nivel' },
+        { text: 'Area SNI', value: 'area' },
         { text: 'Institucion', value: 'institucion' },
-        { text: 'Direccion', value: 'direccion' },
+        { text: 'Direccion de la institucion', value: 'direccion' },
         { text: 'Pais', value: 'pais' },
         { text: 'Entidad', value: 'entidad' },
         { text: 'Telefono', value: 'telefono' },
         { text: 'Celular', value: 'celular' },
-        { text: 'Institucional', value: 'institucional' },
-        { text: 'Personal', value: 'personal' }
+        { text: 'Correo electronico institucional', value: 'institucional' },
+        { text: 'Correo electronico personal', value: 'personal' }
       ],
       editedIndex: -1,
       editedItem: {
@@ -166,7 +178,40 @@ export default {
         campo: '',
         area: '',
         nombre: ''
-      }
+      },
+      json_fields: {
+        'Membresia': 'membresia',
+        'Fecha': 'fecha',
+        'Campo de conocimiento': 'campo',
+        'Area de conocimiento': 'subcampo',
+        'Tipo de miembro': 'tipo',
+        'Nombre': 'nombre',
+        'Paterno': 'paterno',
+        'Materno': 'materno',
+        'Genero': 'genero',
+        'Grado academico': 'grado',
+        'RFC': 'rfc',
+        'CVU': 'cvu',
+        'Pertenece al SNI': 'sni',
+        'Nivel SNI': 'nivel',
+        'Area SNI': 'area',
+        'Institucion': 'institucion',
+        'Direccion de la institicion': 'direccion',
+        'Pais': 'pais',
+        'Entidad': 'entidad',
+        'Telefono': 'telefono',
+        'Celular': 'celular',
+        'Correo electronico institucional': 'institucional',
+        'Correo electronico personal': 'personal'
+      },
+      json_meta: [
+        [
+          {
+            'key': 'charset',
+            'value': 'utf-8'
+          }
+        ]
+      ]
     }
   },
   watch: {
@@ -200,6 +245,18 @@ export default {
       }
       this.close()
     }
+  },
+  mounted () {
+    /* miembrosRef.on('value', (snap) => {
+      snap.forEach((child) => {
+        if (/[0-9]{4}-[0-9]{2}-[0-9]{2}T/.test(child.val().fecha.toString())) {
+          let miembro = child.val()
+          miembro.fecha = child.val().fecha.replace(/T.+/, '')
+          // miembrosRef.child(child.key).update({ fecha: miembro.fecha })
+          console.log(miembro.fecha)
+        }
+      })
+    }) */
   }
 }
 </script>

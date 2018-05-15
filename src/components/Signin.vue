@@ -31,6 +31,7 @@
                       id='password'
                       type='password'
                       v-model='password'
+                      @keyup.enter="userSignIn"
                       required></v-text-field>
                   </v-flex>
                 </v-layout>
@@ -86,6 +87,9 @@ export default {
         this.$store.commit('setError', null)
       }
     }
+  },
+  mounted () {
+    this.$store.dispatch('userSignOut')
   }
 }
 </script>

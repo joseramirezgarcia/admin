@@ -1,6 +1,41 @@
 <template>
   <v-app>
 
+    <v-toolbar dense fixed v-if="admin && isAuthenticated">
+      <v-toolbar-title>
+        <router-link to='/' tag='span' style='cursor: pointer'>
+          C-MIC Módulo de Administración
+        </router-link>
+      </v-toolbar-title>          
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn
+          flat
+          small
+          v-for='item in menuItems'
+          :key='item.title'
+          :to='item.path'>
+          {{ item.title }}
+        </v-btn>
+        <v-btn small flat @click='userSignOut'>
+          Salir
+        </v-btn>        
+      </v-toolbar-items>
+      <v-toolbar-items class="hidden-md-and-up">
+        <v-menu bottom offset-y>
+          <v-btn flat large slot="activator">&nbsp;<v-icon>menu</v-icon></v-btn>
+          <v-list>
+            <v-list-tile v-for="(item,index) in menuItems" :key="index" :to='item.path'>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click='userSignOut'>
+              <v-list-tile-title>Salir</v-list-tile-title>
+            </v-list-tile>            
+          </v-list>
+        </v-menu>
+      </v-toolbar-items>
+    </v-toolbar>
+
     <v-layout row wrap fluid v-if="micrositio5areunion">
       <v-flex xs12 sm12 md12 lg12 fluid>
         <v-toolbar flat fixed color="action">
@@ -51,7 +86,7 @@
       </v-flex>
     </v-layout>
 
-    <v-layout row wrap fluid v-else>
+    <v-layout row wrap fluid v-if="!micrositio5areunion && !admin">
       <v-flex xs12 sm12 md12 lg12 fluid>
         <v-toolbar flat fixed color="action">
           <v-toolbar-title class="white--text mx-auto hidden-sm-and-down body-1"> 
@@ -117,7 +152,7 @@
       <v-spacer></v-spacer>
     </v-footer>
 
-    <v-footer height="auto" class="mt-0" v-else>
+    <v-footer height="auto" class="mt-0" v-if="!micrositio5areunion && !admin">
       <v-card flat tile class="flex">
         <v-card-title class="tertiary white--text">
           <strong class="subheading">COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER</strong>
@@ -216,6 +251,9 @@ export default {
     micrositio5areunion () {
       return /5areunion/.test(this.$route.path)
     },
+    admin () {
+      return /admin/.test(this.$route.path)
+    },
     appTitle () {
       return this.$store.state.appTitle
     },
@@ -232,6 +270,10 @@ export default {
           { title: 'Sede', path: '/5areunion/sede', icon: 'home' },
           { title: 'Hospedaje', path: '/5areunion/hospedaje', icon: 'home' },
           { title: 'Contacto', path: '/5areunion/contacto', icon: 'home' }
+        ]
+      } else if (this.admin) {
+        return [
+          { title: 'Home', path: '/admin/home', icon: 'home' }
         ]
       } else {
         return [

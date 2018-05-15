@@ -16,6 +16,8 @@
             ></v-text-field>
           </v-card-title>   
           <v-data-table
+            :rows-per-page-items="[10,25,50,100,{'text':'Todos','value':-1}]"
+            rows-per-page-text="Miembros por página: "
             :headers='headers'
             :items='miembros'
             class='elevation-1'
