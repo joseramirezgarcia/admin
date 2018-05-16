@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height :style="{ 'background': 'url(\'' + image + '\') ' }" class='fondo'>
+  <v-container fluid fill-height style="background: url('http://c-mic.mx/img/fondo.jpg')" class='fondo'>
     <v-layout justify-center style="margin-top:280px">
       <v-flex xs12 sm10 md10>
         <v-card class="elevation-24">
@@ -23,13 +23,11 @@
 
 <script>
 import { fb } from '../config/firebase'
-import fondo from '../assets/fondo.jpg'
 
 let db = fb.database()
 export default {
   data () {
     return {
-      image: fondo,
       datos: []
     }
   },

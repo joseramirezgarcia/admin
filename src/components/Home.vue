@@ -2,7 +2,7 @@
   <v-container fluid fill-height>
     <v-layout row wrap align-center justify-center style="margin-top:48px">
       <v-flex xs12 class='text-xs-center' my-3>
-        <h1>Home</h1>
+        <h1>Inicio</h1>
       </v-flex>
       <v-flex xs12 class='text-xs-center'>
         <v-card>
@@ -69,11 +69,12 @@
           style   = "cursor:pointer"
           :data   = "miembros"
           :fields = "json_fields"
-          name    = "miembros.xls">
-          Descargar excel <v-icon right small>file_download</v-icon>
+          name    = "CMIC-miembros.xls">
+          XLS<v-icon right small>file_download</v-icon>
         </download-excel>
+        <v-btn class="mt-5" color="success" :href="miembros_csv" download="CMIC-miembros.csv" target="_blank">CSV<v-icon right small>file_download</v-icon></v-btn>
         <v-dialog v-model="dialog" max-width="500px" @keydown.esc="dialog = false">
-          <v-btn slot="activator" color="success" class="mt-5">Agregar Nuevo Miembro <v-icon right small>person_add</v-icon></v-btn>
+          <v-btn slot="activator" color="info" class="mt-5">Agregar Nuevo Miembro <v-icon right small>person_add</v-icon></v-btn>
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
@@ -222,6 +223,9 @@ export default {
   computed: {
     formTitle () {
       return this.editedIndex === -1 ? 'Nuevo Miembro' : 'Editar Miembro ' + this.miembros[this.editedIndex].membresia
+    },
+    miembros_csv () {
+      return this.downloadCSV(this.miembros)
     }
   },
   methods: {
@@ -244,6 +248,41 @@ export default {
         this.miembros.push(this.editedItem)
       }
       this.close()
+    },
+    convertArrayOfObjectsToCSV (args) {
+      var result, ctr, keys, columnDelimiter, lineDelimiter, data
+      data = args.data || null
+      if (data == null || !data.length) {
+        return null
+      }
+      columnDelimiter = args.columnDelimiter || ','
+      lineDelimiter = args.lineDelimiter || '\n'
+      keys = Object.keys(data[0])
+      result = ''
+      result += keys.join(columnDelimiter)
+      result += lineDelimiter
+      data.forEach(function (item) {
+        ctr = 0
+        keys.forEach(function (key) {
+          if (ctr > 0) result += columnDelimiter
+          result += '"' + item[key].toString().replace(/"/g, '""') + '"'
+          ctr++
+        })
+        result += lineDelimiter
+      })
+      return result
+    },
+    downloadCSV (datos) {
+      var data
+      var csv = this.convertArrayOfObjectsToCSV({
+        data: datos
+      })
+      if (csv == null) return
+      if (!csv.match(/^data:text\/csv/i)) {
+        csv = 'data:text/csv;charset=utf-8,' + escape(csv)
+      }
+      data = csv
+      return data
     }
   },
   mounted () {

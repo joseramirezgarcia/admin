@@ -41,11 +41,11 @@
         <v-toolbar flat fixed color="action">
           <v-toolbar-title class="white--text mx-auto hidden-sm-and-down body-1"> 
             REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER
-            <v-btn class="primary" :to="{name: 'inscripcion'}">click aquí</v-btn>
+            <v-btn class="primary" :to="{name: 'inscripcion' }">click aquí</v-btn>
           </v-toolbar-title>   
           <v-toolbar-title class="white--text hidden-md-and-up mx-auto"> 
             <v-spacer></v-spacer>
-            <v-btn small class="primary" style="font-size:10px" :to="{name: 'inscripcion'}">REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL C-MIC</v-btn>
+            <v-btn small class="primary" style="font-size:10px" :to="{name: 'inscripcion' }">REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL C-MIC</v-btn>
             <v-spacer></v-spacer>
           </v-toolbar-title>          
         </v-toolbar>
@@ -54,10 +54,10 @@
         <v-toolbar color="primary5areunion" style="margin-top:56px; line-height: 1.0;" fixed>
           <v-toolbar-title class="white--text">
             <router-link to='/' tag='span' style='cursor: pointer' title="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
-              <img src="@/assets/C-MICblanco.png" width="90vw" alt="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+              <img src="http://c-mic.mx/img/C-MICblanco.png" width="90vw" alt="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
             </router-link>
             <router-link to='/5areunion' tag='span' style='cursor: pointer' title="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
-              <img :src="logo5areunion" width="90vw" alt="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+              <img src="http://c-mic.mx/img/logo5areunion.png" width="90vw" alt="5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
             </router-link>
           </v-toolbar-title>          
           <v-spacer></v-spacer>
@@ -91,11 +91,11 @@
         <v-toolbar flat fixed color="action">
           <v-toolbar-title class="white--text mx-auto hidden-sm-and-down body-1"> 
             REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER
-            <v-btn class="primary" :to="{name: 'inscripcion'}">click aquí</v-btn>
+            <v-btn class="primary" :to="{name: 'inscripcion' }">click aquí</v-btn>
           </v-toolbar-title>   
           <v-toolbar-title class="white--text hidden-md-and-up mx-auto"> 
             <v-spacer></v-spacer>
-            <v-btn small class="primary" style="font-size:10px" :to="{name: 'inscripcion'}">REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL C-MIC</v-btn>
+            <v-btn small class="primary" style="font-size:10px" :to="{name: 'inscripcion' }">REGÍSTRATE A LA 5A REUNIÓN ANUAL DEL C-MIC</v-btn>
             <v-spacer></v-spacer>
           </v-toolbar-title>          
         </v-toolbar>
@@ -104,7 +104,7 @@
         <v-toolbar flat dense fixed style="margin-top:56px" color="white">
           <v-toolbar-title class="white--text"> 
             <router-link to='/' tag='span' style='cursor: pointer' title="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
-              <img src="@/assets/C-MIC.png" width="90vw" alt="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
+              <img src="http://c-mic.mx/img/C-MIC.png" width="90vw" alt="C-MIC COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER">
             </router-link>
           </v-toolbar-title>          
           <v-spacer class="hidden-md-and-up"></v-spacer>
@@ -148,7 +148,7 @@
 
     <v-footer height="auto" class="mt-0 py-2" v-if="micrositio5areunion" color="tertiary">
       <v-spacer></v-spacer>
-      <img src="@/assets/logos.png" style="max-width:30%">
+      <img src="http://c-mic.mx/img/logos.png" style="max-width:30%">
       <v-spacer></v-spacer>
     </v-footer>
 
@@ -157,7 +157,7 @@
         <v-card-title class="tertiary white--text">
           <strong class="subheading">COLEGIO MEXICANO PARA LA INVESTIGACIÓN DEL CÁNCER</strong>
           <v-spacer></v-spacer>
-          <!-- <a href="http://microscopia.c-mic.mx/"><img src="http://c-mic.mx/images/cima_a.png" width="90vw"></a>-->
+          <!-- <a href="http://microscopia.c-mic.mx/"><img src="http://c-mic.mx/img/cima_a.png" width="90vw"></a>-->
           <v-btn
             icon
             dark
@@ -229,16 +229,10 @@
 </template>
 
 <script>
-import fondo from './assets/5reunionanual.jpg'
-import logo5areunion from './assets/logo5areunion.png'
-
 export default {
   data () {
     return {
       sidebar: false,
-      image: fondo,
-      logo5areunion: logo5areunion,
-      icons: ['fa fa-facebook', 'fa fa-twitter'],
       rows: [
         {
           title: 'C-MIC'
@@ -263,27 +257,28 @@ export default {
     menuItems () {
       if (this.micrositio5areunion) {
         return [
-          { title: 'Inicio', path: '/5areunion', icon: 'home' },
-          { title: 'Invitación', path: '/5areunion/invitacion', icon: 'home' },
-          { title: 'Ponentes', path: '/5areunion/ponentes', icon: 'home' },
-          { title: 'Regístrate', path: '/5areunion/inscripcion', icon: 'home' },
-          { title: 'Sede', path: '/5areunion/sede', icon: 'home' },
-          { title: 'Hospedaje', path: '/5areunion/hospedaje', icon: 'home' },
-          { title: 'Contacto', path: '/5areunion/contacto', icon: 'home' }
+          { title: 'Inicio', path: '/5areunion' },
+          { title: 'Invitación', path: '/5areunion/invitacion' },
+          { title: 'Ponentes', path: '/5areunion/ponentes' },
+          { title: 'Regístrate', path: '/5areunion/inscripcion' },
+          { title: 'Sede', path: '/5areunion/sede' },
+          { title: 'Hospedaje', path: '/5areunion/hospedaje' },
+          { title: 'Contacto', path: '/5areunion/contacto' }
         ]
       } else if (this.admin) {
         return [
-          { title: 'Home', path: '/admin/home', icon: 'home' }
+          { title: 'Inicio', path: '/admin/home' },
+          { title: 'Estadísticas', path: '/admin/statics' }
         ]
       } else {
         return [
-          { title: 'Inicio', path: '/', icon: 'face' },
-          { title: 'Nosotros', path: '/Nosotros', icon: 'face' },
-          { title: 'Difusión', path: '/Difusion', icon: 'lock_open' },
-          /* { title: 'Convocatorias', path: '/Registro', icon: 'lock_open' }, */
-          { title: 'Reuniones', path: '/Reuniones', icon: 'lock_open', submenus: [{title: 'Convocatorias', path: 'convocatorias'}, {title: 'Próximos eventos', path: 'eventos'}] },
-          { title: 'Miembros', path: '/Miembros', icon: 'lock_open', submenus: [{title: 'Registro', path: 'registro'}, {title: 'Directorio', path: 'directorio'}, {title: 'Investigadores', path: 'investigadores'}, {title: 'Estudiantes', path: 'estudiantes'}] },
-          { title: 'Contacto', path: '/contacto', icon: 'lock_open' }
+          { title: 'Inicio', path: '/' },
+          { title: 'Nosotros', path: '/Nosotros' },
+          { title: 'Difusión', path: '/Difusion' },
+          /* { title: 'Convocatorias', path: '/Registro' }, */
+          { title: 'Reuniones', path: '/Reuniones', submenus: [{ title: 'Convocatorias', path: 'convocatorias' }, { title: 'Próximos eventos', path: 'eventos' }] },
+          { title: 'Miembros', path: '/Miembros', submenus: [{ title: 'Registro', path: 'registro' }, { title: 'Directorio', path: 'directorio' }, { title: 'Investigadores', path: 'investigadores' }, { title: 'Estudiantes', path: 'estudiantes' }] },
+          { title: 'Contacto', path: '/contacto' }
         ]
       }
     }

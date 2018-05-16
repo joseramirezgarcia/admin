@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height :style="{ 'background': 'url(\'' + image + '\') ' }" class='fondo'>
+  <v-container fluid fill-height style="background: url('http://c-mic.mx/img/fondo.jpg')" class='fondo'>
     <v-layout justify-center>
       <v-flex xs12 sm10 md9 lg8>
         <v-card class="elevation-24">
@@ -359,7 +359,6 @@
 
 <script>
 import { fb } from '../config/firebase'
-import fondo from '../assets/fondo.jpg'
 import axios from 'axios'
 
 let db = fb.database()
@@ -392,7 +391,6 @@ export default {
   },
   data () {
     return {
-      image: fondo,
       formaMiembros: false,
       miembro: {
         membresia: '',

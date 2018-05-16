@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height :style="{ 'background': 'url(\'' + image + '\') ' }" class='fondo'>
+  <v-container fluid fill-height style="background: url('http://c-mic.mx/img/5reunionanual.jpg')" class='fondo'>
     <v-layout justify-center style="margin-top:120px">
       <v-flex xs12 sm10 md10 lg10>
         <v-card class="elevation-24">
@@ -188,7 +188,6 @@
 <script>
 import { fb } from '../config/firebase'
 import paypal from 'paypal-checkout'
-import fondo from '../assets/5reunionanual.jpg'
 import { production } from '../config/paypal.js'
 import axios from 'axios'
 
@@ -208,7 +207,6 @@ export default {
   },
   data () {
     return {
-      image: fondo,
       miembro: null,
       amount: 0,
       boton: false,

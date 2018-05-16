@@ -18,6 +18,7 @@
     "paypal-checkout": "^4.0.198",
     "vue": "^2.5.2",
     "vue-accordion": "^1.0.0",
+    "vue-analytics": "^5.10.6",
     "vue-carousel": "^0.7.3",
     "vue-chartkick": "^0.3.1",
     "vue-flashcard": "^1.1.6",

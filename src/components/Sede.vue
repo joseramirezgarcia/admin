@@ -7,23 +7,11 @@
       </v-flex>
       <v-flex xs12 sm6 offset-sm3 justify-center>
         <h1 class="ma-5 display-2 primary5areunion--text text-xs-center">MAPA DEL LUGAR</h1>
-        <img :src="mapa" style="width:100%" mx-auto>
+        <img src="http://c-mic.mx/img/mapa.png" style="width:100%" mx-auto>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
-
-<script>
-import mapa from '../assets/mapa.png'
-
-export default {
-  data () {
-    return {
-      mapa: mapa
-    }
-  }
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

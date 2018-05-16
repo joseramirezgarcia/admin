@@ -5,15 +5,3 @@
     </v-layout>
   </v-container>
 </template>
-
-<script>
-import fondo from '../assets/5reunionanual.jpg'
-
-export default {
-  data () {
-    return {
-      image: fondo
-    }
-  }
-}
-</script>

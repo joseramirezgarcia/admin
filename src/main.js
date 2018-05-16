@@ -14,6 +14,12 @@ import VueChartkick from 'vue-chartkick'
 import VueCarousel from 'vue-carousel'
 import {vueAccordion} from 'vue-accordion'
 import JsonExcel from 'vue-json-excel'
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, {
+  id: 'UA-119292021-1',
+  router
+})
 
 Vue.component('downloadExcel', JsonExcel)
 

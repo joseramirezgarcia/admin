@@ -3,7 +3,7 @@
     <v-flex xs12 sm10 offset-sm1 mb-5>
       <h1 class="mb-5 display-2 primary--text text-xs-center">ESTUDIANTES</h1>
       <v-card class="elevation-12">
-        <v-card-media :src="imagen" height="200px">
+        <v-card-media src="http://c-mic.mx/img/estudiantes.jpg" height="200px">
         </v-card-media>
         <v-card-text>
           <div>
@@ -25,18 +25,6 @@
     </v-flex>
   </v-layout>
 </template>
-
-<script>
-import estudiantes from '../assets/estudiantes.jpg'
-
-export default {
-  data () {
-    return {
-      imagen: estudiantes
-    }
-  }
-}
-</script>
 
 <style scoped>
   p, li {

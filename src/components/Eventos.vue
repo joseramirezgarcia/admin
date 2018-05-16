@@ -6,7 +6,7 @@
       </v-flex>
       <v-flex xs12 sm6 offset-sm3>
         <v-card class="elevation-12 my-3">
-            <v-card-media :src="evento0" height="200px">
+            <v-card-media src="http://c-mic.mx/img/5reunionanual.jpg" height="200px">
             </v-card-media>
             <v-card-title primary-title>
             <div>
@@ -22,7 +22,7 @@
       </v-flex>
       <v-flex xs12 sm6 offset-sm3>
         <v-card class="elevation-12 my-3">
-            <v-card-media :src="evento2" height="200px">
+            <v-card-media src="http://c-mic.mx/img/evento2.jpg" height="200px">
             </v-card-media>
             <v-card-title primary-title>
             <div>
@@ -40,7 +40,7 @@
       </v-flex>
       <v-flex xs12 sm6 offset-sm3>
         <v-card class="elevation-12 my-3">
-            <v-card-media :src="evento3" height="200px">
+            <v-card-media src="http://c-mic.mx/img/evento3.jpg" height="200px">
             </v-card-media>
             <v-card-title primary-title>
             <div>
@@ -56,7 +56,7 @@
       </v-flex>      
       <v-flex xs12 sm6 offset-sm3>
         <v-card class="elevation-12 my-3">
-            <v-card-media :src="evento4" height="200px">
+            <v-card-media src="http://c-mic.mx/img/banner04.jpg" height="200px">
             </v-card-media>
             <v-card-title primary-title>
             <div>
@@ -73,7 +73,7 @@
       </v-flex>      
       <v-flex xs12 sm6 offset-sm3>
         <v-card class="elevation-12 my-3">
-            <v-card-media :src="evento1" height="200px">
+            <v-card-media src="http://c-mic.mx/img/evento1.jpg" height="200px">
             </v-card-media>
             <v-card-title primary-title>
             <div>
@@ -90,26 +90,6 @@
     </v-layout>
   </v-container>
 </template>
-
-<script>
-import evento0 from '../assets/5reunionanual.jpg'
-import evento1 from '../assets/evento1.jpg'
-import evento2 from '../assets/evento2.jpg'
-import evento3 from '../assets/evento3.jpg'
-import evento4 from '../assets/banner04.jpg'
-
-export default {
-  data () {
-    return {
-      evento0: evento0,
-      evento1: evento1,
-      evento2: evento2,
-      evento3: evento3,
-      evento4: evento4
-    }
-  }
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
