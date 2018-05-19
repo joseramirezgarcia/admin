@@ -22,24 +22,6 @@
       </v-flex>
       <v-flex xs12 sm6 offset-sm3>
         <v-card class="elevation-12 my-3">
-            <v-card-media src="http://c-mic.mx/img/evento2.jpg" height="200px">
-            </v-card-media>
-            <v-card-title primary-title>
-            <div>
-                <h3 class="headline mb-0">4o CONGRESO NACIONAL DE INVESTIGACIÓN CLÍNICA</h3>
-                <div>15 - 17 Mayo 2018</div>
-                <div>Auditorio Instituto Nacional de Cancerología, CDMX</div>
-                <div>Hotel Radisson Perisur, CDMX</div>
-            </div>
-            </v-card-title>
-            <v-card-actions>
-            <v-btn flat color="secondary" href="http://c-mic.mx/PDF/4oCongreso.pdf" target="_blank">Información</v-btn>
-            <v-btn flat color="secondary" href="http://c-mic.mx/PDF/Agenda_4oCongreso.pdf" target="_blank">Agenda</v-btn>
-            </v-card-actions>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 sm6 offset-sm3>
-        <v-card class="elevation-12 my-3">
             <v-card-media src="http://c-mic.mx/img/evento3.jpg" height="200px">
             </v-card-media>
             <v-card-title primary-title>

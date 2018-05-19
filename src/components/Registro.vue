@@ -416,7 +416,8 @@ export default {
         celular: '',
         personal: '',
         institucional: '',
-        fecha: ''
+        fecha: '',
+        activo: ''
       },
       institucionesOrdenadas: [],
       formaNuevaInstitucion: false,
@@ -881,6 +882,7 @@ export default {
         this.miembro.celular = this.celular
         this.miembro.personal = this.personal.toLowerCase()
         this.miembro.institucional = this.institucional.toLowerCase()
+        this.miembro.activo = 'NO'
         this.miembro.fecha = hoy
         // console.log(this.miembro)
         let res = miembrosRef.push(this.miembro)

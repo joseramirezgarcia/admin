@@ -255,7 +255,7 @@ export default {
             exist = true
           }
         }
-        if (!exist) {
+        if (!exist && item.activo.toString() === 'SI') {
           arr.push(item)
         }
       })
@@ -358,7 +358,7 @@ export default {
             tipo: that.miembro.tipo,
             comidauno: that.comidauno,
             comidados: that.comidados,
-            total: that.amount,
+            total: that.total,
             codigo: that.codigo
           }
           // console.log(miembro)

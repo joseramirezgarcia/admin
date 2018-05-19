@@ -14,11 +14,6 @@
       </router-link>
     </slide>
     <slide>
-      <a href="http://c-mic.mx/PDF/APEIC4oCongreso.pdf" target="_blank">
-        <img src="http://c-mic.mx/img/banner05.jpg" style="width:100%">
-      </a>
-    </slide>
-    <slide>
       <a href="http://c-mic.mx/PDF/SeminarioMedicinaPrecision.pdf" target="_blank">
         <img src="http://c-mic.mx/img/banner06.jpg" style="width:100%">
       </a>

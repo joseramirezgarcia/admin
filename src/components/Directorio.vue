@@ -24,7 +24,7 @@
             :pagination.sync="pagination"
             :search="search"
           >
-            <template slot='items' slot-scope='props'>
+            <template slot='items' slot-scope='props' v-if="props.item.activo==='SI'">
               <td>{{ props.item.membresia }}</td>
               <td>{{ props.item.nombre }}</td>
               <td>{{ props.item.paterno }}</td>
@@ -39,7 +39,7 @@
               Miembros {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
             </template>
             <v-alert slot="no-results" :value="true" color="error" icon="warning">
-              "{{ search }}" No devuelve ningun resultado
+              No hay registros que contengan "{{ search }}"
             </v-alert>                   
           </v-data-table>
         </v-card>

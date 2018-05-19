@@ -28,12 +28,19 @@
           >
             <template slot='items' slot-scope='props'>
               <td class="justify-center layout px-0">
-                <v-btn icon class="mx-0" @click="editItem(props.item)">
+                <v-btn icon class="mx-0" @click="editItem(props.item)" title="Editar">
                   <v-icon color="orange">edit</v-icon>
                 </v-btn>
+                <v-btn icon class="mx-0" @click="activar(props.item)" title="Activo" v-if="props.item.activo === 'SI'">
+                  <v-icon color="green">verified_user</v-icon>
+                </v-btn>
+                <v-btn icon class="mx-0" @click="activar(props.item)" title="Inactivo" v-else>
+                  <v-icon color="red">error</v-icon>
+                </v-btn>                                
               </td>              
               <td>{{ props.item.membresia }}</td>
               <td>{{ props.item.fecha }}</td>
+              <td>{{ props.item.activo }}</td>
               <td>{{ props.item.campo }}</td>
               <td>{{ props.item.subcampo }}</td>
               <td>{{ props.item.tipo }}</td>            
@@ -60,20 +67,12 @@
               Miembros {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
             </template>
             <v-alert slot="no-results" :value="true" color="error" icon="warning">
-              Your search for "{{ search }}" found no results.
+              No hay registros que contengan "{{ search }}"
             </v-alert>                   
           </v-data-table>
         </v-card>
-        <download-excel
-          class   = "btn mt-5"
-          style   = "cursor:pointer"
-          :data   = "miembros"
-          :fields = "json_fields"
-          name    = "CMIC-miembros.xls">
-          XLS<v-icon right small>file_download</v-icon>
-        </download-excel>
-        <v-btn class="mt-5" color="success" :href="miembros_csv" download="CMIC-miembros.csv" target="_blank">CSV<v-icon right small>file_download</v-icon></v-btn>
-        <v-dialog v-model="dialog" max-width="500px" @keydown.esc="dialog = false">
+        <v-btn class="mt-5" color="success" :href="miembros_csv" :download="'CMIC-miembros-' + hoy + '.csv'" target="_blank">Descargar archivo<v-icon right small>file_download</v-icon></v-btn>
+        <v-dialog v-model="dialog" max-width="90vw" @keydown.esc="dialog = false">
           <v-btn slot="activator" color="info" class="mt-5">Agregar Nuevo Miembro <v-icon right small>person_add</v-icon></v-btn>
           <v-card>
             <v-card-title>
@@ -89,10 +88,13 @@
                     <v-text-field label="Fecha" v-model="editedItem.fecha"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md6>
-                    <v-text-field label="Campo de conocmiento" v-model="editedItem.campo"></v-text-field>
+                    <v-text-field label="Activo" v-model="editedItem.activo"></v-text-field>
+                  </v-flex>                  
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Campo de conocimiento" v-model="editedItem.campo"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md6>
-                    <v-text-field label="Area de conocmiento" v-model="editedItem.area"></v-text-field>
+                    <v-text-field label="Area de conocmiento" v-model="editedItem.subcampo"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md6>
                     <v-text-field label="Tipo de miembro" v-model="editedItem.tipo"></v-text-field>
@@ -105,14 +107,59 @@
                   </v-flex>
                   <v-flex xs12 sm6 md6>
                     <v-text-field label="Materno" v-model="editedItem.materno"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Género" v-model="editedItem.genero"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Grado Académico" v-model="editedItem.grado"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="RFC" v-model="editedItem.rfc"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="CVU" v-model="editedItem.cvu"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Pertenece al SNI" v-model="editedItem.sni"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Nivel SNI" v-model="editedItem.nivel"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Área SNI" v-model="editedItem.area"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Institución" v-model="editedItem.institucion"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Dirección" v-model="editedItem.direccion"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="País" v-model="editedItem.pais"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Entidad" v-model="editedItem.entidad"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Télefono" v-model="editedItem.telefono"></v-text-field>
+                  </v-flex>                  
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Celular" v-model="editedItem.celular"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Correo electrónico institucional" v-model="editedItem.institucional"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field label="Correo electrónico Personal" v-model="editedItem.personal"></v-text-field>
                   </v-flex>                  
                 </v-layout>
               </v-container>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" flat @click.native="close">Cancelar</v-btn>
-              <v-btn color="blue darken-1" flat @click.native="save" disabled>Guardar</v-btn>
+              <v-btn color="blue darken-1" outline @click.native="close">Cancelar<v-icon right>close</v-icon></v-btn>
+              <v-btn color="blue darken-1" outline @click.native="save">Guardar<v-icon right>save</v-icon></v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>             
@@ -136,13 +183,15 @@ export default {
     return {
       dialog: false,
       pagination: {
-        sortBy: 'membresia'
+        sortBy: 'membresia',
+        descending: true
       },
       search: '',
       headers: [
         { text: 'Editar', value: 'editar', sortable: false },
         { text: 'Membresia', value: 'membresia' },
         { text: 'Fecha', value: 'fecha' },
+        { text: 'Activo', value: 'activo' },
         { text: 'Campo de conocimiento', value: 'campo' },
         { text: 'Area de conocimiento', value: 'subcampo' },
         { text: 'Tipo de miembro', value: 'tipo' },
@@ -170,15 +219,51 @@ export default {
         membresia: '',
         fecha: '',
         campo: '',
+        subcampo: '',
+        tipo: '',
+        nombre: '',
+        paterno: '',
+        materno: '',
+        genero: '',
+        grado: '',
+        rfc: '',
+        cvu: '',
+        sni: '',
+        nivel: '',
         area: '',
-        nombre: ''
+        institucion: '',
+        direccion: '',
+        pais: '',
+        entidad: '',
+        telefono: '',
+        celular: '',
+        institucional: '',
+        personal: ''
       },
       defaultItem: {
         membresia: '',
         fecha: '',
         campo: '',
+        subcampo: '',
+        tipo: '',
+        nombre: '',
+        paterno: '',
+        materno: '',
+        genero: '',
+        grado: '',
+        rfc: '',
+        cvu: '',
+        sni: '',
+        nivel: '',
         area: '',
-        nombre: ''
+        institucion: '',
+        direccion: '',
+        pais: '',
+        entidad: '',
+        telefono: '',
+        celular: '',
+        institucional: '',
+        personal: ''
       },
       json_fields: {
         'Membresia': 'membresia',
@@ -225,10 +310,28 @@ export default {
       return this.editedIndex === -1 ? 'Nuevo Miembro' : 'Editar Miembro ' + this.miembros[this.editedIndex].membresia
     },
     miembros_csv () {
-      return this.downloadCSV(this.miembros)
+      return this.downloadCSV(this.miembros, this.headers)
+    },
+    hoy () {
+      var today = new Date()
+      var dd = today.getDate()
+      var mm = today.getMonth() + 1
+      var yyyy = today.getFullYear()
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      const hoy = yyyy + '-' + mm + '-' + dd
+      return hoy
     }
   },
   methods: {
+    activar (item) {
+      let activo = item.activo.toString() === 'NO' ? 'SI' : 'NO'
+      miembrosRef.child(item['.key']).update({ activo: activo })
+    },
     editItem (item) {
       this.editedIndex = this.miembros.indexOf(item)
       this.editedItem = Object.assign({}, item)
@@ -243,39 +346,54 @@ export default {
     },
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.miembros[this.editedIndex], this.editedItem)
+        let upd = []
+        Object.assign(upd, this.editedItem)
+        delete upd['.key']
+        miembrosRef.child(this.editedItem['.key']).set(upd)
+        upd = []
       } else {
-        this.miembros.push(this.editedItem)
+        miembrosRef.push(this.editedItem)
       }
       this.close()
     },
     convertArrayOfObjectsToCSV (args) {
-      var result, ctr, keys, columnDelimiter, lineDelimiter, data
+      var result, ctr, keys, columnDelimiter, lineDelimiter, data, head
       data = args.data || null
       if (data == null || !data.length) {
         return null
       }
+      head = args.head || Object.keys(data[0])
       columnDelimiter = args.columnDelimiter || ','
       lineDelimiter = args.lineDelimiter || '\n'
-      keys = Object.keys(data[0])
+      keys = head
       result = ''
-      result += keys.join(columnDelimiter)
+      ctr = 0
+      keys.forEach(function (key) {
+        if (key.text !== 'Editar') {
+          if (ctr > 0) result += columnDelimiter
+          result += key.text
+          ctr++
+        }
+      })
       result += lineDelimiter
       data.forEach(function (item) {
         ctr = 0
         keys.forEach(function (key) {
-          if (ctr > 0) result += columnDelimiter
-          result += '"' + item[key].toString().replace(/"/g, '""') + '"'
-          ctr++
+          if (item[key.value] !== undefined) {
+            if (ctr > 0) result += columnDelimiter
+            result += '"' + item[key.value].toString().replace(/"/g, '""') + '"'
+            ctr++
+          }
         })
         result += lineDelimiter
       })
       return result
     },
-    downloadCSV (datos) {
+    downloadCSV (datos, encabezado) {
       var data
       var csv = this.convertArrayOfObjectsToCSV({
-        data: datos
+        data: datos,
+        head: encabezado
       })
       if (csv == null) return
       if (!csv.match(/^data:text\/csv/i)) {
