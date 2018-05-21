@@ -278,19 +278,6 @@ export default {
         }
         this.codigo = hoy.slice(0, Math.round(hoy.length / 2)) + this.miembro.nombre.charAt(0) + this.miembro.paterno.charAt(0) + comida + this.miembro.materno.charAt(0) + '-' + hoy.slice(Math.round(hoy.length / 2), hoy.length)
       }
-    },
-    info (key) {
-      quintaReunionRef.child(key).on('value', function (snapshot) {
-        // console.log(snapshot.val())
-        if (snapshot.exists()) {
-          axios.get('http://c-mic.mx/jrg/index.php?registro=Pago', {
-            params: snapshot.val()
-          })
-          .then(function (response) {
-            // console.log(response)
-          })
-        }
-      })
     }
   },
   watch: {
@@ -365,8 +352,10 @@ export default {
           // console.log(payment)
           let respuesta = []
           respuesta = Object.assign(payment, miembro)
-          let res = quintaReunionRef.push(respuesta)
-          that.info(res.key)
+          quintaReunionRef.push(respuesta)
+          axios.get('http://c-mic.mx/jrg/index.php?registro=Pago', {
+            params: respuesta
+          })
           // console.log(respuesta)
         } else {
           that.error = true

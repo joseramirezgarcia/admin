@@ -88,24 +88,13 @@ export default {
           mensaje: this.mensaje,
           fecha: hoy
         }
-        let res = mensajesRef.push(mensaje)
-        this.info(res.key)
+        mensajesRef.push(mensaje)
+        axios.get('http://c-mic.mx/jrg/index.php?registro=Mensaje', {
+          params: mensaje
+        })
         this.$refs.formaMensaje.reset()
         this.success = true
       }
-    },
-    info (key) {
-      mensajesRef.child(key).on('value', function (snapshot) {
-        // console.log(snapshot.val())
-        if (snapshot.exists()) {
-          axios.get('http://c-mic.mx/jrg/index.php?registro=Mensaje', {
-            params: snapshot.val()
-          })
-          .then(function (response) {
-            // console.log(response)
-          })
-        }
-      })
     }
   },
   watch: {

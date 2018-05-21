@@ -886,22 +886,11 @@ export default {
         this.miembro.fecha = hoy
         // console.log(this.miembro)
         let res = miembrosRef.push(this.miembro)
-        this.info(res.key)
+        axios.get('http://c-mic.mx/jrg/index.php?registro=Miembro', {
+          params: this.miembro
+        })
         self.$router.push({ name: 'confirmacion', params: { miembro: res.key } })
       }
-    },
-    info (key) {
-      miembrosRef.child(key).on('value', function (snapshot) {
-        // console.log(snapshot.val())
-        if (snapshot.exists()) {
-          axios.get('http://c-mic.mx/jrg/index.php?registro=Miembro', {
-            params: snapshot.val()
-          })
-          .then(function (response) {
-            // console.log(response)
-          })
-        }
-      })
     }
   },
   created () {

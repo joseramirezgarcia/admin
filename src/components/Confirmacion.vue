@@ -7,7 +7,6 @@
             <v-flex class="text-xs-center">
               Sus datos han sido registrados correctamente.
             </v-flex>
-            <!--<pre>{{datos}}</pre>-->
             <v-flex class="text-xs-center">
               <v-btn small style="font-size:10px" color="primary" to='/'>Volver al sitio web del C-MIC</v-btn>
             </v-flex>
