@@ -170,14 +170,17 @@
 
 <script>
 import { fb } from '../config/firebase'
+// import axios from 'axios'
 
 let db = fb.database()
 let miembrosRef = db.ref('miembros')
+let bienvenidasRef = db.ref('bienvenidas')
 
 export default {
   name: 'Home',
   firebase: {
-    miembros: miembrosRef
+    miembros: miembrosRef,
+    bienvenidas: bienvenidasRef
   },
   data () {
     return {
@@ -331,6 +334,14 @@ export default {
     activar (item) {
       let activo = item.activo.toString() === 'NO' ? 'SI' : 'NO'
       miembrosRef.child(item['.key']).update({ activo: activo })
+      /* if (item.activo.toString() === 'NO') {
+        if (this.bienvenidas.filter(o => o.membresia === item.membresia).length < 1) {
+          bienvenidasRef.push({membresia: item.membresia})
+          axios.get('http://c-mic.mx/jrg/index.php?registro=Bienvenida', {
+            params: item
+          })
+        }
+      } */
     },
     editItem (item) {
       this.editedIndex = this.miembros.indexOf(item)
@@ -402,18 +413,6 @@ export default {
       data = csv
       return data
     }
-  },
-  mounted () {
-    /* miembrosRef.on('value', (snap) => {
-      snap.forEach((child) => {
-        if (/[0-9]{4}-[0-9]{2}-[0-9]{2}T/.test(child.val().fecha.toString())) {
-          let miembro = child.val()
-          miembro.fecha = child.val().fecha.replace(/T.+/, '')
-          // miembrosRef.child(child.key).update({ fecha: miembro.fecha })
-          console.log(miembro.fecha)
-        }
-      })
-    }) */
   }
 }
 </script>

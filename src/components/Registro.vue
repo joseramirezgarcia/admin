@@ -855,11 +855,7 @@ export default {
           mm = '0' + mm
         }
         const hoy = yyyy + '-' + mm + '-' + dd
-        let self = this
-        miembrosRef.limitToLast(1).on('child_added', function (childSnapshot) {
-          const snap = childSnapshot.val()
-          self.miembro.membresia = (parseInt(snap.membresia) + 1).toString()
-        })
+        this.miembro.membresia = (parseInt(this.miembros[this.miembros.length - 1].membresia) + 1).toString()
         this.miembro.tipo = this.tipo
         this.miembro.nombre = this.nombre.toUpperCase().replace(/[^A-ZÑa-zñ]/g, function (ch) { return map[ch] || ch })
         this.miembro.paterno = this.paterno.toUpperCase().replace(/[^A-ZÑa-zñ]/g, function (ch) { return map[ch] || ch })
@@ -882,14 +878,14 @@ export default {
         this.miembro.celular = this.celular
         this.miembro.personal = this.personal.toLowerCase()
         this.miembro.institucional = this.institucional.toLowerCase()
-        this.miembro.activo = 'NO'
+        this.miembro.activo = 'SI'
         this.miembro.fecha = hoy
         // console.log(this.miembro)
         let res = miembrosRef.push(this.miembro)
         axios.get('http://c-mic.mx/jrg/index.php?registro=Miembro', {
           params: this.miembro
         })
-        self.$router.push({ name: 'confirmacion', params: { miembro: res.key } })
+        this.$router.push({ name: 'confirmacion', params: { miembro: res.key } })
       }
     }
   },
