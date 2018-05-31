@@ -25,7 +25,7 @@
             :search="search"
           >
             <template slot='items' slot-scope='props' v-if="props.item.activo==='SI'">
-              <td>{{ props.item.membresia }}</td>
+              <td><router-link :to="'/miembro/' + props.item.membresia">{{ props.item.membresia }}</router-link></td>
               <td>{{ props.item.nombre }}</td>
               <td>{{ props.item.paterno }}</td>
               <td>{{ props.item.materno }}</td>
