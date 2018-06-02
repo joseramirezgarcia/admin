@@ -1,7 +1,7 @@
 <template>
   <v-app>
 
-    <v-toolbar dense fixed v-if="admin && isAuthenticated">
+    <v-toolbar dense fixed v-if="admin && isAdmin">
       <v-toolbar-title>
         <router-link to='/' tag='span' style='cursor: pointer'>
           C-MIC Módulo de Administración
@@ -17,7 +17,7 @@
           :to='item.path'>
           {{ item.title }}
         </v-btn>
-        <v-btn small flat @click='userSignOut'>
+        <v-btn small flat @click='adminSignOut'>
           Salir
         </v-btn>        
       </v-toolbar-items>
@@ -28,7 +28,7 @@
             <v-list-tile v-for="(item,index) in menuItems" :key="index" :to='item.path'>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile @click='userSignOut'>
+            <v-list-tile @click='adminSignOut'>
               <v-list-tile-title>Salir</v-list-tile-title>
             </v-list-tile>            
           </v-list>
@@ -251,8 +251,8 @@ export default {
     appTitle () {
       return this.$store.state.appTitle
     },
-    isAuthenticated () {
-      return this.$store.getters.isAuthenticated
+    isAdmin () {
+      return this.$store.getters.isAdmin
     },
     menuItems () {
       if (this.micrositio5areunion) {
@@ -284,8 +284,8 @@ export default {
     }
   },
   methods: {
-    userSignOut () {
-      this.$store.dispatch('userSignOut')
+    adminSignOut () {
+      this.$store.dispatch('adminSignOut')
     }
   }
 }

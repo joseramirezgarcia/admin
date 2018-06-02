@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     userSignIn () {
-      this.$store.dispatch('userSignIn', {
+      this.$store.dispatch('adminSignIn', {
         email: this.email,
         password: this.password
       })
@@ -89,7 +89,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('userSignOut')
+    this.$store.dispatch('adminSignOut')
   }
 }
 </script>

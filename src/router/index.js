@@ -10,7 +10,7 @@ const routerOptions = [
   { path: '/nosotros', component: 'Nosotros', name: 'nosotros', meta: {title: 'Nosotros - ' + titulo} },
   { path: '/difusion', component: 'Difusion', name: 'difusion', meta: {title: 'Difusión - ' + titulo} },
   { path: '/reuniones', component: 'Reuniones', name: 'reuniones', meta: {title: 'Reuniones - ' + titulo}, children: [{path: '/reuniones/convocatorias', component: resolve => require(['../components/Convocatorias.vue'], resolve), name: 'convocatorias', meta: {title: 'Convocatorias - ' + titulo}}, {path: '/reuniones/eventos', component: resolve => require(['../components/Eventos.vue'], resolve), name: 'eventos', meta: {title: 'Eventos - ' + titulo}}] },
-  { path: '/miembros', component: 'Miembros', name: 'miembros', meta: {title: 'Miembros - ' + titulo}, children: [{path: '/miembros/directorio', component: resolve => require(['../components/Directorio.vue'], resolve), name: 'directorio', meta: {title: 'Directorio - ' + titulo}}, {path: '/miembros/registro', component: resolve => require(['../components/Registro.vue'], resolve), name: 'registro', meta: {title: 'Registro - ' + titulo}}, {path: '/miembros/investigadores', component: resolve => require(['../components/Investigadores.vue'], resolve), name: 'investigadores', meta: {title: 'Investigadores - ' + titulo}}, {path: '/miembros/estudiantes', component: resolve => require(['../components/Estudiantes.vue'], resolve), name: 'estudiantes', meta: {title: 'Estudiantes - ' + titulo}}, {path: '/miembros/entrada', component: resolve => require(['../components/Entrada.vue'], resolve), name: 'entrada', meta: {title: 'Entrada - ' + titulo}}] },
+  { path: '/miembros', component: 'Miembros', name: 'miembros', meta: {title: 'Miembros - ' + titulo}, children: [{path: '/miembros/directorio', component: resolve => require(['../components/Directorio.vue'], resolve), name: 'directorio', meta: {title: 'Directorio - ' + titulo}}, {path: '/miembros/registro', component: resolve => require(['../components/Registro.vue'], resolve), name: 'registro', meta: {title: 'Registro - ' + titulo}}, {path: '/miembros/investigadores', component: resolve => require(['../components/Investigadores.vue'], resolve), name: 'investigadores', meta: {title: 'Investigadores - ' + titulo}}, {path: '/miembros/estudiantes', component: resolve => require(['../components/Estudiantes.vue'], resolve), name: 'estudiantes', meta: {title: 'Estudiantes - ' + titulo}}, {path: '/miembros/entrada', component: resolve => require(['../components/Entrada.vue'], resolve), name: 'entrada', meta: {title: 'Entrada - ' + titulo}}, {path: '/miembros/datos', component: resolve => require(['../components/Datos.vue'], resolve), name: 'datos', meta: {title: 'Miembro - ' + titulo, requiresAuth: true}}] },
   { path: '/miembro/:membresia', component: 'Miembro', name: 'miembro', props: true, meta: {title: 'Miembro - ' + titulo} },
   { path: '/contacto', component: 'Contacto', name: 'contacto', meta: {title: 'Contacto - ' + titulo} },
   { path: '/confirmacion', component: 'Confirmacion', name: 'confirmacion', props: true, meta: {title: 'Confirmación - ' + titulo} },
@@ -40,9 +40,29 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   const isAuthenticated = firebase.auth().currentUser
+  const zonaAdmin = /admin/.test(to.fullPath)
   document.title = to.meta.title
-  if (requiresAuth && !isAuthenticated) {
-    next('/admin')
+  if (requiresAuth) {
+    if (zonaAdmin) {
+      if (isAuthenticated) {
+        firebase.database().ref('roles/administrador').once('value', function (r) {
+          let administradores = r.val()
+          if (administradores.filter(a => a.email === isAuthenticated.email).length > 0) {
+            next()
+          } else {
+            next('/admin')
+          }
+        })
+      } else {
+        next('/admin')
+      }
+    } else {
+      if (isAuthenticated) {
+        next()
+      } else {
+        next('/miembros/entrada')
+      }
+    }
   } else {
     next()
   }

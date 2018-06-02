@@ -43,7 +43,7 @@ let db = fb.database()
 export default {
   data () {
     return {
-      datos: '',
+      datos: null,
       campos: {
         'Membresia': 'membresia',
         'Fecha': 'fecha',

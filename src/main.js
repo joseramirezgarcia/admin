@@ -15,6 +15,8 @@ import VueCarousel from 'vue-carousel'
 import {vueAccordion} from 'vue-accordion'
 import VueAnalytics from 'vue-analytics'
 
+let db = fb.database()
+
 Vue.use(VueAnalytics, {
   id: 'UA-119292021-1',
   router
@@ -52,7 +54,14 @@ const unsubscribe = fb.auth()
     render: h => h(App),
     created () {
       if (firebaseUser) {
-        store.dispatch('autoSignIn', firebaseUser)
+        db.ref('roles/administrador').once('value', function (r) {
+          let administradores = r.val()
+          let administrador = false
+          if (administradores.filter(a => a.email === firebaseUser.email).length > 0) {
+            administrador = true
+            store.dispatch('autoAdminSignIn', { email: firebaseUser.email, admin: administrador })
+          }
+        })
       }
     }
   })

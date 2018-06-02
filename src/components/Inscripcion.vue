@@ -21,7 +21,7 @@
                 >
                   <template slot="no-data">
                     <v-list-tile-content>
-                      <v-btn color="primary" to="registro">Registrarse como nuevo miembro</v-btn>
+                      <v-btn color="primary" :to="{name: 'registro'}">Registrarse como nuevo miembro</v-btn>
                     </v-list-tile-content>
                   </template>                
                   <template slot="selection" slot-scope="data">

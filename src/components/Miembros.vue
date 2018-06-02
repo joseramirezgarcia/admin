@@ -1,7 +1,6 @@
 <template>
   <v-content>
     <v-flex xs12>
-      {{$route.path}}
       <div class="text-xs-center" color="white" style="margin-top:104px">
         |
         <router-link class="primary--text" :to="{name: 'registro'}">Registro</router-link> | 
