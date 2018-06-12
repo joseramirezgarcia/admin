@@ -277,7 +277,7 @@ export default {
           { title: 'Difusión', path: '/Difusion' },
           /* { title: 'Convocatorias', path: '/Registro' }, */
           { title: 'Reuniones', path: '/Reuniones', submenus: [{ title: 'Convocatorias', path: 'convocatorias' }, { title: 'Próximos eventos', path: 'eventos' }] },
-          { title: 'Miembros', path: '/Miembros', submenus: [{ title: 'Registro', path: 'registro' }, { title: 'Directorio', path: 'directorio' }, { title: 'Investigadores', path: 'investigadores' }, { title: 'Estudiantes', path: 'estudiantes' }] },
+          { title: 'Miembros', path: '/Miembros', submenus: [{ title: 'Registro', path: 'registro' }, { title: 'Directorio', path: 'directorio' }, { title: 'Ingresar', path: 'ingresar' }, { title: 'Investigadores', path: 'investigadores' }, { title: 'Estudiantes', path: 'estudiantes' }] },
           { title: 'Contacto', path: '/contacto' }
         ]
       }

@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid style="bacgroundColor=#FFFFFF">
-    <v-layout row  style="margin-top:104px">
+  <v-container fluid>
+    <v-layout row>
       <v-flex xs12 sm8 offset-sm2 v-if="datos">
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark>
@@ -20,17 +20,45 @@
                   </v-list-tile-title>
                   <v-list-tile-title v-else>
                     {{datos[campo]}}
-                    </v-list-tile-title>                  
+                  </v-list-tile-title>                  
                 </v-list-tile-content>
               </v-list-tile>
-              <v-divider :key="index + 'divider'" v-if="datos[campo] !== '' && campo !== 'personal'"></v-divider>              
+              <v-divider :key="index + 'divider'" v-if="datos[campo] !== ''"></v-divider>              
             </template>
           </v-list>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="info" to='/miembros/datos'>Actualizar datos</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn color="info" @click.native="enviar">Cambiar contraseña</v-btn>
+            <v-spacer></v-spacer>
+          </v-card-actions>
         </v-card>
       </v-flex>
       <v-flex xs12 sm8 offset-sm2 v-else>
         <h2 style="text-align:center" class="primary--text">Datos no encontrados</h2>
       </v-flex>
+      <v-btn
+        dark
+        fab
+        fixed
+        right
+        top
+        color="tertiary"
+        title="Descargar archivo"
+        @click='userSignOut'
+      >
+        Salir
+      </v-btn>
+      <v-snackbar
+        :timeout="1500"
+        :bottom="true"
+        v-model="snackbar"
+        :color="'primary'"
+      >
+        {{ mensaje }}
+        <v-btn flat color="white" @click.native="snackbar = false">Cerrar</v-btn>
+      </v-snackbar>
     </v-layout>
   </v-container>
 </template>
@@ -39,9 +67,20 @@
 import { fb } from '../config/firebase'
 
 let db = fb.database()
+let miembrosRef = db.ref('miembros')
 export default {
+  firebase: {
+    miembros: {
+      source: miembrosRef,
+      readyCallback: function () {
+        this.llenarDatos()
+      }
+    }
+  },
   data () {
     return {
+      snackbar: false,
+      mensaje: '',
       datos: null,
       campos: {
         'Membresia': 'membresia',
@@ -67,12 +106,25 @@ export default {
       }
     }
   },
-  props: ['membresia'],
-  created () {
-    let self = this
-    db.ref('miembros/' + this.membresia).once('value', function (snapshot) {
-      self.datos = snapshot.val()
-    })
+  methods: {
+    userSignOut () {
+      this.$store.dispatch('userSignOut')
+    },
+    llenarDatos () {
+      let datos = this.miembros.filter(m => m.personal.toString() === fb.auth().currentUser.email.toString())
+      if (datos.length > 0) {
+        this.datos = datos[0]
+      } else {
+        this.userSignOut()
+      }
+    },
+    enviar () {
+      this.snackbar = true
+      this.mensaje = 'Datos enviados a su correo electrónico'
+      fb.auth().sendPasswordResetEmail(fb.auth().currentUser.email.toString())
+      let that = this
+      setTimeout(function () { that.userSignOut() }, 1500)
+    }
   }
 }
 </script>

@@ -5,6 +5,7 @@
         |
         <router-link class="primary--text" :to="{name: 'registro'}">Registro</router-link> | 
         <router-link class="primary--text" :to="{name: 'directorio'}">Directorio</router-link> | 
+        <router-link class="primary--text" :to="{name: 'ingresar'}">Ingresar</router-link> | 
         <router-link class="primary--text" :to="{name: 'investigadores'}">Investigadores</router-link> | 
         <router-link class="primary--text" :to="{name: 'estudiantes'}">Estudiantes</router-link> | 
       </div>

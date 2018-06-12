@@ -81,7 +81,7 @@ export const store = new Vuex.Store({
           commit('setUser', { email: firebaseUser.email })
           commit('setLoading', false)
           commit('setError', null)
-          router.push('/miembros/datos')
+          router.push('/miembros/informacion')
         })
         .catch(error => {
           commit('setError', error.message)
@@ -91,7 +91,7 @@ export const store = new Vuex.Store({
     userSignOut ({commit}) {
       firebase.auth().signOut()
       commit('setUser', null)
-      router.push('/miembros/entrada')
+      router.push('/miembros/ingresar')
     },
     autoSignIn ({commit}, payload) {
       commit('setUser', {email: payload.email})
