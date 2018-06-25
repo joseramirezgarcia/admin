@@ -25,7 +25,8 @@
             :search="search"
           >
             <template slot='items' slot-scope='props' v-if="props.item.activo==='SI'">
-              <td><router-link :to="'/miembro/' + props.item.membresia">{{ props.item.membresia }}</router-link></td>
+              <td v-if="isAuthenticated"><router-link :to="'/miembro/' + props.item.membresia">{{ props.item.membresia }}</router-link></td>
+              <td v-else>{{ props.item.membresia }}</td>
               <td>{{ props.item.nombre }}</td>
               <td>{{ props.item.paterno }}</td>
               <td>{{ props.item.materno }}</td>
@@ -76,6 +77,11 @@ export default {
         { text: 'Telefono', value: 'telefono' },
         { text: 'E-mail', value: 'email' }
       ]
+    }
+  },
+  computed: {
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
     }
   }
 }

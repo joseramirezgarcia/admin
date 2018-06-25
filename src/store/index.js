@@ -76,12 +76,19 @@ export const store = new Vuex.Store({
     },
     userSignIn ({ commit }, payload) {
       commit('setLoading', true)
-      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+      firebase.auth().signInAndRetrieveDataWithEmailAndPassword(payload.email, payload.password)
         .then(firebaseUser => {
           commit('setUser', { email: firebaseUser.email })
           commit('setLoading', false)
           commit('setError', null)
-          router.push('/miembros/informacion')
+          if (firebase.auth().currentUser.displayName) {
+            router.push('/miembros/informacion')
+          } else {
+            firebase.auth().currentUser.updateProfile({
+              displayName: payload.email
+            })
+            router.push('/miembros/datos')
+          }
         })
         .catch(error => {
           commit('setError', error.message)
@@ -102,7 +109,6 @@ export const store = new Vuex.Store({
       return state.user !== null && state.user !== undefined
     },
     isAdmin (state) {
-      console.log(state.admin)
       return state.admin !== null && state.admin !== undefined
     }
   }

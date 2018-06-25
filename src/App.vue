@@ -268,15 +268,16 @@ export default {
       } else if (this.admin) {
         return [
           { title: 'Inicio', path: '/admin/home' },
-          { title: 'Estadísticas', path: '/admin/statics' }
+          { title: 'Estadísticas', path: '/admin/statics' },
+          { title: 'Pagos', path: '/admin/payments' }
         ]
       } else {
         return [
           { title: 'Inicio', path: '/' },
           { title: 'Nosotros', path: '/Nosotros' },
-          { title: 'Difusión', path: '/Difusion' },
+          { title: 'Videos', path: '/Difusion' },
           /* { title: 'Convocatorias', path: '/Registro' }, */
-          { title: 'Reuniones', path: '/Reuniones', submenus: [{ title: 'Convocatorias', path: 'convocatorias' }, { title: 'Próximos eventos', path: 'eventos' }] },
+          { title: 'Reuniones', path: '/Reuniones', submenus: [{ title: 'Convocatorias', path: 'convocatorias' }, { title: '5a Reunión Anual del C-MIC', path: '5areunion' }, { title: 'Próximos eventos', path: 'eventos' }] },
           { title: 'Miembros', path: '/Miembros', submenus: [{ title: 'Registro', path: 'registro' }, { title: 'Directorio', path: 'directorio' }, { title: 'Ingresar', path: 'ingresar' }, { title: 'Investigadores', path: 'investigadores' }, { title: 'Estudiantes', path: 'estudiantes' }] },
           { title: 'Contacto', path: '/contacto' }
         ]

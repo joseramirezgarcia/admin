@@ -28,9 +28,9 @@
           </v-list>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="info" to='/miembros/datos'>Actualizar datos</v-btn>
+            <v-btn color="info" to='/miembros/datos' class="my-3">Actualizar datos</v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="info" @click.native="enviar">Cambiar contraseña</v-btn>
+            <v-btn color="info" @click.native="enviar" class="my-3">Cambiar contraseña</v-btn>
             <v-spacer></v-spacer>
           </v-card-actions>
         </v-card>

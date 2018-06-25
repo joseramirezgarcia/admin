@@ -194,6 +194,7 @@ import axios from 'axios'
 let db = fb.database()
 let miembrosRef = db.ref('miembros')
 let quintaReunionRef = db.ref('quintareunion')
+let preciosRef = db.ref('precios')
 
 export default {
   firebase: {
@@ -203,7 +204,8 @@ export default {
       readyCallback: function () {
         this.excluirMiembros()
       }
-    }
+    },
+    precios: preciosRef
   },
   data () {
     return {
@@ -284,9 +286,9 @@ export default {
     miembro: function () {
       if (this.miembro !== null) {
         this.incompleto = false
-        this.amount = 900
+        this.amount = this.precios.filter(p => p.tipo === 'INVESTIGADOR')[0].precio
         if (this.miembro.tipo === 'ESTUDIANTE') {
-          this.amount = 700
+          this.amount = this.precios.filter(p => p.tipo === 'ESTUDIANTE')[0].precio
         }
         this.generarCodigo()
       }
@@ -312,12 +314,51 @@ export default {
       production: production
     }
     let payment = (data, actions) => {
+      let detalles = []
+      detalles.push({
+        quantity: 1,
+        name: 'COSTO ' + this.miembro.tipo,
+        price: this.amount,
+        currency: 'MXN',
+        description: 'Inscripción a la 5a Reunión Anual del C-MIC'
+      })
+      if (this.comidauno || this.comidados) {
+        if (this.comidauno) {
+          detalles.push({
+            quantity: 1,
+            name: 'SEP27',
+            price: this.costo,
+            currency: 'MXN',
+            description: 'Comida mesa con ponente 27 de Septiembre'
+          })
+        }
+        if (this.comidados) {
+          detalles.push({
+            quantity: 1,
+            name: 'SEP28',
+            price: this.costo,
+            currency: 'MXN',
+            description: 'Comida mesa con ponente 28 de Septiembre'
+          })
+        }
+      } else {
+        detalles.push({
+          quantity: 1,
+          name: 'SIN COMIDA',
+          price: 0,
+          currency: 'MXN',
+          description: 'Sin comida con ponente'
+        })
+      }
       // Make a call to the REST api to create the payment
       return actions.payment.create({
         payment: {
           transactions: [
             {
-              amount: { total: this.total, currency: 'MXN' }
+              amount: { total: this.total, currency: 'MXN' },
+              item_list: {
+                items: detalles
+              }
             }
           ]
         }
@@ -338,6 +379,7 @@ export default {
           that.success = true
           that.generarCodigo()
           let miembro = {
+            forma: 'PayPal',
             nombre: that.miembro.nombre,
             paterno: that.miembro.paterno,
             materno: that.miembro.materno,
@@ -354,8 +396,11 @@ export default {
           }
           // console.log(miembro)
           // console.log(payment)
-          let respuesta = []
-          respuesta = Object.assign(payment, miembro)
+          /* let respuesta = []
+          respuesta = Object.assign(payment, miembro) */
+          let respuesta = {}
+          for (let attrname in miembro) { respuesta[attrname] = miembro[attrname] }
+          for (let attrname in payment) { respuesta[attrname] = payment[attrname] }
           quintaReunionRef.push(respuesta)
           axios.get('http://c-mic.mx/jrg/index.php?registro=Pago', {
             params: respuesta

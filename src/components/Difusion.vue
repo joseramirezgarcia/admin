@@ -12,14 +12,14 @@
         <v-spacer></v-spacer>
       </v-flex>
     </v-layout>
-    <v-layout row wrap grid-list-md mt-3>
-      <v-flex xs12 sm3 v-for="(a,index) in difusion" :key="index" v-if="activo===a.tag"> 
+    <v-layout row wrap grid-list-md mt-3 justify-center>
+      <v-flex xs12 sm6 md3 v-for="(a,index) in difusion" :key="index" v-if="activo===a.tag"> 
         <vue-flashcard 
           v-if="a.tipo==='youtube'"
           headerFront=""
           :front="a.titulo" 
           footerFront=""
-          textSizeFront="16px"
+          textSizeFront="1.5vh"
           colorTextFront="#005090"
           :headerBack="a.titulo"
           :back="a.descripcion" 
@@ -35,7 +35,7 @@
           headerFront=""
           :front="a.titulo" 
           footerFront=""
-          textSizeFront="16px"
+          textSizeFront="1.5vh"
           colorTextFront="#005090"
           :headerBack="a.titulo"
           back="" 

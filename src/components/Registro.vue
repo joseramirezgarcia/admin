@@ -141,7 +141,7 @@
               <v-flex>
                 <v-text-field
                   name='cvu'
-                  label='Currículum vitae único (CVU)'
+                  label='Currículum Vitae Único (CVU)'
                   id='cvu'
                   type='text'
                   v-model='cvu'
@@ -151,8 +151,8 @@
                   persistent-hint
                   ></v-text-field>
               </v-flex>              
-              <v-flex>
-                <v-switch color="primary" label="Sistema nacional de investigadores (SNI)" v-model="sni" hint="Otorgado por CONACyT" persistent-hint></v-switch>
+              <v-flex mt-4>
+                <v-switch color="primary" label="Sistema Nacional de Investigadores (SNI)" v-model="sni" hint="Otorgado por CONACyT" persistent-hint></v-switch>
               </v-flex>
               <v-flex v-if="sni">
                 <v-select
