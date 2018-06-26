@@ -31,7 +31,9 @@
               <td>{{ props.item.nombre }}</td>
               <td>{{ props.item.paterno }}</td>
               <td>{{ props.item.materno }}</td>
+              <td>{{ props.item.entidad }}</td>
               <td>{{ props.item.tipo }}</td>
+              <td>{{ props.item.edad }}</td>
               <td>{{ props.item.pagado1 }}</td>
               <td>{{ props.item.pagado2 }}</td>
               <td>$ {{ props.item.precio1 }}</td>
@@ -42,8 +44,11 @@
               <td>{{ props.item.paypal }}</td>
             </template>
             <template slot="footer">
-              <td colspan="7">
+              <td colspan="8">
                 <strong>TOTALES</strong>
+              </td>
+              <td>
+                <strong>{{ edad }}</strong>
               </td>
               <td>
                 <strong>{{ pagados1 }}</strong>
@@ -84,10 +89,12 @@ import { fb } from '../config/firebase'
 
 let db = fb.database()
 let quintareunionRef = db.ref('quintareunion')
+let miembrosRef = db.ref('miembros')
 
 export default {
   name: 'Home',
   firebase: {
+    miembros: miembrosRef,
     pagos: {
       source: quintareunionRef,
       readyCallback: function () {
@@ -99,6 +106,7 @@ export default {
     return {
       dialog: false,
       search: '',
+      edad: 0,
       pagados1: 0,
       pagados2: 0,
       total1: '0.00',
@@ -112,7 +120,9 @@ export default {
         { text: 'Nombre', value: 'nombre' },
         { text: 'Paterno', value: 'paterno' },
         { text: 'Materno', value: 'materno' },
+        { text: 'Entidad', value: 'entidad' },
         { text: 'Tipo', value: 'tipo' },
+        { text: 'Edad', value: 'edad' },
         { text: 'Asistencia comida 27 SEP', value: 'pagado1' },
         { text: 'Asistencia comida 28 SEP', value: 'pagado2' },
         { text: 'Pago comida 27 SEP', value: 'precio1' },
@@ -129,7 +139,9 @@ export default {
         'Nombre': 'nombre',
         'Paterno': 'paterno',
         'Materno': 'materno',
+        'Entidad': 'entidad',
         'Tipo': 'tipo',
+        'Edad': 'edad',
         'Asistencia comida 27 SEP': 'pagado1',
         'Asistencia Comida 28 SEP': 'pagado2',
         'Pago comida 27 SEP': 'precio1',
@@ -159,7 +171,9 @@ export default {
         'nombre': '',
         'paterno': '',
         'materno': '',
+        'entidad': '',
         'tipo': 'TOTALES',
+        'edad': this.edad,
         'pagado1': this.pagados1,
         'precio1': this.total1,
         'pagado2': this.pagados2,
@@ -188,6 +202,8 @@ export default {
   },
   methods: {
     formatearPagos () {
+      let conedad = 0
+      let edades = 0
       for (let p in this.pagos) {
         let date = new Date(this.pagos[p].create_time)
         date.setHours(date.getHours())
@@ -235,7 +251,27 @@ export default {
         this.total2 = (parseInt(this.total2) + parseInt(c2.precio)).toString() + '.00'
         this.total = (parseInt(this.total) + parseInt(this.pagos[p].inscripcion)).toString() + '.00'
         this.totales = (parseInt(this.totales) + parseInt(this.pagos[p].suma)).toString() + '.00'
+        let miembro = this.miembros.filter(m => m.membresia === this.pagos[p].membresia)[0]
+        let nacimiento = ''
+        if (miembro.hasOwnProperty('nacimiento')) {
+          if (/\d{4}-\d{2}-\d{2}/.test(miembro.nacimiento)) {
+            nacimiento = new Date(miembro.nacimiento.substr(0, 4), miembro.nacimiento.substr(5, 2), miembro.nacimiento.substr(7, 2), 0, 0, 0, 0)
+          }
+        } else {
+          if (/^([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{0,3})$/gi.test(miembro.rfc)) {
+            nacimiento = new Date('19' + miembro.rfc.substr(4, 2), miembro.rfc.substr(6, 2), miembro.rfc.substr(8, 2), 0, 0, 0, 0)
+          }
+        }
+        let edad = ''
+        if (nacimiento !== '') {
+          edad = Math.ceil((new Date() - nacimiento) / (1000 * 60 * 60 * 24 * 31 * 12))
+          conedad = conedad + 1
+          edades = edades + edad
+        }
+        this.pagos[p].entidad = miembro.entidad
+        this.pagos[p].edad = edad
       }
+      this.edad = (edades / conedad).toFixed(2)
     },
     convertArrayOfObjectsToCSV (args) {
       var result, ctr, keys, columnDelimiter, lineDelimiter, data, head
